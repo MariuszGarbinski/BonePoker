@@ -16,6 +16,18 @@ import android.hardware.SensorEvent;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
 
+    private TextView text1;
+    private TextView text2;
+    private TextView text3;
+    private TextView text4;
+    private TextView text5;
+    private TextView text6;
+    private FrameLayout ball1;
+    private FrameLayout ball2;
+    private FrameLayout ball3;
+    private FrameLayout ball4;
+    private FrameLayout ball5;
+    private FrameLayout ball6;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
@@ -24,10 +36,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorEvent sensorEvent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //getRandomNumber();
         senSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener((SensorEventListener) this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
@@ -43,39 +56,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent sensorEevent) {
-        Sensor mySensor = sensorEvent.sensor;
-
-        if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
-
-            long curTime = System.currentTimeMillis();
-
-            if ((curTime - lastUpdate) > 100) {
-                long diffTime = (curTime - lastUpdate);
-                lastUpdate = curTime;
-
-                float speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
-
-                if (speed > SHAKE_THRESHOLD) {
-
-                }
-
-                last_x = x;
-                last_y = y;
-                last_z = z;
-            }
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
-
     private void getRandomNumber() {
         ArrayList numbersGenerated = new ArrayList();
 
@@ -83,47 +63,43 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Random randNumber = new Random();
             int iNumber = randNumber.nextInt(6) + 1;
 
-            if(!numbersGenerated.contains(iNumber)) {
-                numbersGenerated.add(iNumber);
-            } else {
-                i--;
-            }
+            numbersGenerated.add(iNumber);
         }
 
-        TextView text = (TextView)findViewById(R.id.number_1);
-        text.setText(""+numbersGenerated.get(0));
+        text1 = (TextView)findViewById(R.id.number_1);
+        text1.setText(""+numbersGenerated.get(0));
 
-        text = (TextView)findViewById(R.id.number_2);
-        text.setText(""+numbersGenerated.get(1));
+        text2 = (TextView)findViewById(R.id.number_2);
+        text2.setText(""+numbersGenerated.get(1));
 
-        text = (TextView)findViewById(R.id.number_3);
-        text.setText(""+numbersGenerated.get(2));
+        text3 = (TextView)findViewById(R.id.number_3);
+        text3.setText(""+numbersGenerated.get(2));
 
-        text = (TextView)findViewById(R.id.number_4);
-        text.setText(""+numbersGenerated.get(3));
+        text4 = (TextView)findViewById(R.id.number_4);
+        text4.setText(""+numbersGenerated.get(3));
 
-        text = (TextView)findViewById(R.id.number_5);
-        text.setText(""+numbersGenerated.get(4));
+        text5 = (TextView)findViewById(R.id.number_5);
+        text5.setText(""+numbersGenerated.get(4));
 
-        text = (TextView)findViewById(R.id.number_6);
-        text.setText(""+numbersGenerated.get(5));
+        text6 = (TextView)findViewById(R.id.number_6);
+        text6.setText(""+numbersGenerated.get(5));
 
-        FrameLayout ball1 = (FrameLayout) findViewById(R.id.ball_1);
+        ball1 = (FrameLayout) findViewById(R.id.ball_1);
         ball1.setVisibility(View.INVISIBLE);
 
-        FrameLayout ball2 = (FrameLayout) findViewById(R.id.ball_2);
+        ball2 = (FrameLayout) findViewById(R.id.ball_2);
         ball2.setVisibility(View.INVISIBLE);
 
-        FrameLayout ball3 = (FrameLayout) findViewById(R.id.ball_3);
+        ball3 = (FrameLayout) findViewById(R.id.ball_3);
         ball3.setVisibility(View.INVISIBLE);
 
-        FrameLayout ball4 = (FrameLayout) findViewById(R.id.ball_4);
+        ball4 = (FrameLayout) findViewById(R.id.ball_4);
         ball4.setVisibility(View.INVISIBLE);
 
-        FrameLayout ball5 = (FrameLayout) findViewById(R.id.ball_5);
+        ball5 = (FrameLayout) findViewById(R.id.ball_5);
         ball5.setVisibility(View.INVISIBLE);
 
-        FrameLayout ball6 = (FrameLayout) findViewById(R.id.ball_6);
+        ball6 = (FrameLayout) findViewById(R.id.ball_6);
         ball6.setVisibility(View.INVISIBLE);
 
         Animation a = AnimationUtils.loadAnimation(this, R.anim.move_down_ball_first);
@@ -152,7 +128,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         ball1.startAnimation(a);
     }
 
-    public void onSensorChange(SensorEvent sensorEvent) {
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
         Sensor mySensor = sensorEvent.sensor;
 
         if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -177,6 +155,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 last_z = z;
             }
         }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
     }
 
 }

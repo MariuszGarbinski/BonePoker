@@ -24,7 +24,8 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="36sp" />
         </FrameLayout>
 
         <FrameLayout
@@ -41,7 +42,8 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="36sp" />
         </FrameLayout>
 
         <FrameLayout
@@ -58,7 +60,8 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="36sp" />
         </FrameLayout>
     </LinearLayout>
 
@@ -83,7 +86,8 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="36sp" />
         </FrameLayout>
 
         <FrameLayout
@@ -100,7 +104,8 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="36sp" />
         </FrameLayout>
 
         <FrameLayout
@@ -117,7 +122,8 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="36sp" />
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>
