@@ -9,10 +9,13 @@ import java.util.Random;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
 
@@ -21,13 +24,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView text3;
     private TextView text4;
     private TextView text5;
-    private TextView text6;
-    private FrameLayout ball1;
-    private FrameLayout ball2;
-    private FrameLayout ball3;
-    private FrameLayout ball4;
-    private FrameLayout ball5;
-    private FrameLayout ball6;
+    private FrameLayout square1;
+    private FrameLayout square2;
+    private FrameLayout square3;
+    private FrameLayout square4;
+    private FrameLayout square5;
+    //private Switch switch1;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
     private long lastUpdate = 0;
@@ -40,10 +42,75 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //getRandomNumber();
         senSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener((SensorEventListener) this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
+
+        final Switch switch1 = (Switch)findViewById(R.id.switch_1);
+        final Switch switch2 = (Switch)findViewById(R.id.switch_2);
+        final Switch switch3 = (Switch)findViewById(R.id.switch_3);
+        final Switch switch4 = (Switch)findViewById(R.id.switch_4);
+        final Switch switch5 = (Switch)findViewById(R.id.switch_5);
+
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch1.isChecked()){
+                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 1",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 1",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch2.isChecked()){
+                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 2",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 2",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch3.isChecked()){
+                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 3",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 3",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch4.isChecked()){
+                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 4",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 4",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        switch5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch5.isChecked()){
+                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 5",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 5",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     protected void onPause() {
@@ -57,75 +124,122 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private void getRandomNumber() {
+
+        Switch switch1 = (Switch)findViewById(R.id.switch_1);
+        Switch switch2 = (Switch)findViewById(R.id.switch_2);
+        Switch switch3 = (Switch)findViewById(R.id.switch_3);
+        Switch switch4 = (Switch)findViewById(R.id.switch_4);
+        Switch switch5 = (Switch)findViewById(R.id.switch_5);
+
         ArrayList numbersGenerated = new ArrayList();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             Random randNumber = new Random();
             int iNumber = randNumber.nextInt(6) + 1;
 
             numbersGenerated.add(iNumber);
         }
+        //Sprawdzanie czy switch jest w pozycji ON i wyłączenie odświeżania liczb
+        if(switch1.isChecked()){
 
-        text1 = (TextView)findViewById(R.id.number_1);
-        text1.setText(""+numbersGenerated.get(0));
+        }else{
+            text1 = (TextView)findViewById(R.id.number_1);
+            text1.setText(""+numbersGenerated.get(0));
+        }
+        if(switch2.isChecked()){
 
-        text2 = (TextView)findViewById(R.id.number_2);
-        text2.setText(""+numbersGenerated.get(1));
+        }else{
+            text2 = (TextView)findViewById(R.id.number_2);
+            text2.setText(""+numbersGenerated.get(1));
+        }
+        if(switch3.isChecked()){
 
-        text3 = (TextView)findViewById(R.id.number_3);
-        text3.setText(""+numbersGenerated.get(2));
+        }else{
+            text3 = (TextView)findViewById(R.id.number_3);
+            text3.setText(""+numbersGenerated.get(2));
+        }
+        if(switch4.isChecked()){
 
-        text4 = (TextView)findViewById(R.id.number_4);
-        text4.setText(""+numbersGenerated.get(3));
+        }else{
+            text4 = (TextView)findViewById(R.id.number_4);
+            text4.setText(""+numbersGenerated.get(3));
+        }
+        if(switch5.isChecked()){
 
-        text5 = (TextView)findViewById(R.id.number_5);
-        text5.setText(""+numbersGenerated.get(4));
+        }else{
+            text5 = (TextView)findViewById(R.id.number_5);
+            text5.setText(""+numbersGenerated.get(4));
+        }
 
-        text6 = (TextView)findViewById(R.id.number_6);
-        text6.setText(""+numbersGenerated.get(5));
+        //Sprawdzanie czy switch jest w pozycji ON i wyłączenie animacji kości
+        if(switch1.isChecked()){
 
-        ball1 = (FrameLayout) findViewById(R.id.ball_1);
-        ball1.setVisibility(View.INVISIBLE);
+        }else{
+            square1 = (FrameLayout) findViewById(R.id.square_1);
+            square1.setVisibility(View.INVISIBLE);
+        }
+        if(switch2.isChecked()){
 
-        ball2 = (FrameLayout) findViewById(R.id.ball_2);
-        ball2.setVisibility(View.INVISIBLE);
+        }else{
+            square2 = (FrameLayout) findViewById(R.id.square_2);
+            square2.setVisibility(View.INVISIBLE);
+        }
+        if(switch3.isChecked()){
 
-        ball3 = (FrameLayout) findViewById(R.id.ball_3);
-        ball3.setVisibility(View.INVISIBLE);
+        }else{
+            square3 = (FrameLayout) findViewById(R.id.square_3);
+            square3.setVisibility(View.INVISIBLE);
+        }
+        if(switch4.isChecked()){
 
-        ball4 = (FrameLayout) findViewById(R.id.ball_4);
-        ball4.setVisibility(View.INVISIBLE);
+        }else{
+            square4 = (FrameLayout) findViewById(R.id.square_4);
+            square4.setVisibility(View.INVISIBLE);
+        }
+        if(switch5.isChecked()){
 
-        ball5 = (FrameLayout) findViewById(R.id.ball_5);
-        ball5.setVisibility(View.INVISIBLE);
-
-        ball6 = (FrameLayout) findViewById(R.id.ball_6);
-        ball6.setVisibility(View.INVISIBLE);
+        }else{
+            square5 = (FrameLayout) findViewById(R.id.square_5);
+            square5.setVisibility(View.INVISIBLE);
+        }
 
         Animation a = AnimationUtils.loadAnimation(this, R.anim.move_down_ball_first);
-        ball6.setVisibility(View.VISIBLE);
-        ball6.clearAnimation();
-        ball6.startAnimation(a);
 
-        ball5.setVisibility(View.VISIBLE);
-        ball5.clearAnimation();
-        ball5.startAnimation(a);
+        if(switch5.isChecked()){
 
-        ball4.setVisibility(View.VISIBLE);
-        ball4.clearAnimation();
-        ball4.startAnimation(a);
+        }else{
+            square5.setVisibility(View.VISIBLE);
+            square5.clearAnimation();
+            square5.startAnimation(a);
+        }
+        if(switch4.isChecked()){
 
-        ball3.setVisibility(View.VISIBLE);
-        ball3.clearAnimation();
-        ball3.startAnimation(a);
+        }else{
+            square4.setVisibility(View.VISIBLE);
+            square4.clearAnimation();
+            square4.startAnimation(a);
+        }
+        if(switch3.isChecked()){
 
-        ball2.setVisibility(View.VISIBLE);
-        ball2.clearAnimation();
-        ball2.startAnimation(a);
+        }else{
+            square3.setVisibility(View.VISIBLE);
+            square3.clearAnimation();
+            square3.startAnimation(a);
+        }
+        if(switch2.isChecked()){
 
-        ball1.setVisibility(View.VISIBLE);
-        ball1.clearAnimation();
-        ball1.startAnimation(a);
+        }else{
+            square2.setVisibility(View.VISIBLE);
+            square2.clearAnimation();
+            square2.startAnimation(a);
+        }
+        if(switch1.isChecked()){
+
+        }else{
+            square1.setVisibility(View.VISIBLE);
+            square1.clearAnimation();
+            square1.startAnimation(a);
+        }
     }
 
     @Override
