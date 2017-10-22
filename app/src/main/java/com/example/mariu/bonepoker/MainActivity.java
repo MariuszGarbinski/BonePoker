@@ -5,11 +5,14 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.hardware.SensorEventListener;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.Switch;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static final int SHAKE_THRESHOLD = 600;
     private SensorEvent sensorEvent;
     private Toast infoToast;
+    private Result diceRolls;
 
 
     public void showToast(String message)
@@ -88,18 +92,32 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
 
+        if(diceRolls == null) diceRolls = new Result();
+
+
+
         final Switch switch1 = (Switch)findViewById(R.id.switch_1);
         final Switch switch2 = (Switch)findViewById(R.id.switch_2);
         final Switch switch3 = (Switch)findViewById(R.id.switch_3);
         final Switch switch4 = (Switch)findViewById(R.id.switch_4);
         final Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        final Button btnSave = (Button)findViewById(R.id.btnSave);
+        final Button btnClear = (Button)findViewById(R.id.btnClear);
 
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch1.isChecked()){
-                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 1");
+                    if(diceRolls.dice1 == 0)
+                    {
+                        switch1.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 1");
+                    }
+
                 }else{
                     showToast("Odblokowano kość 1");
                 }
@@ -111,7 +129,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch2.isChecked()){
-                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 2");
+                    if(diceRolls.dice2 == 0)
+                    {
+                        switch2.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 2");
+                    }
+
                 }else{
                     showToast("Odblokowano kość 2");
                 }
@@ -123,7 +149,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch3.isChecked()){
-                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 3");
+                    if(diceRolls.dice3 == 0)
+                    {
+                        switch3.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 3");
+                    }
+
                 }else{
                     showToast("Odblokowano kość 3");
                 }
@@ -135,7 +169,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch4.isChecked()){
-                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 4");
+                    if(diceRolls.dice4 == 0)
+                    {
+                        switch4.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 4");
+                    }
+
                 }else{
                     showToast("Odblokowano kość 4");
                 }
@@ -147,12 +189,83 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch5.isChecked()){
-                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 5");
+                    if(diceRolls.dice5 == 0)
+                    {
+                        switch5.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 5");
+                    }
+
                 }else{
                     showToast("Odblokowano kość 5");
                 }
             }
         });
+
+        btnSave.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view){
+                if (checkSwitches())
+                {
+                    if(diceRolls != null)
+                    {
+                        diceRolls.Tmstmp = new Date();
+                        ResultDBManager dbMan = new ResultDBManager(getApplicationContext());
+                        if(dbMan.insert(diceRolls) > 0)
+                        {
+                            ResetControls();
+                        }
+                        else
+                        {
+                            showToast("Błąd zapisu do bazy danych.");
+                        }
+                    }
+                }
+                else
+                {
+                    showToast("Najpierw zablokuj wszystkie kości!");
+                }
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view){
+                ResetControls();
+
+            }
+        });
+
+    }
+
+    private void ResetControls()
+    {
+        diceRolls = null;
+        Switch switch1 = (Switch)findViewById(R.id.switch_1);
+        Switch switch2 = (Switch)findViewById(R.id.switch_2);
+        Switch switch3 = (Switch)findViewById(R.id.switch_3);
+        Switch switch4 = (Switch)findViewById(R.id.switch_4);
+        Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        switch1.setChecked(false);
+        switch2.setChecked(false);
+        switch3.setChecked(false);
+        switch4.setChecked(false);
+        switch5.setChecked(false);
+        text1 = (TextView)findViewById(R.id.number_1);
+        text2 = (TextView)findViewById(R.id.number_2);
+        text3 = (TextView)findViewById(R.id.number_3);
+        text4 = (TextView)findViewById(R.id.number_4);
+        text5 = (TextView)findViewById(R.id.number_5);
+        text1.setText("");
+        text2.setText("");
+        text3.setText("");
+        text4.setText("");
+        text5.setText("");
+
     }
 
     protected void onPause() {
@@ -193,6 +306,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             square1.setVisibility(View.VISIBLE);
             square1.clearAnimation();
             square1.startAnimation(a);
+            diceRolls.dice1 = numbersGenerated.get(0);
         }
         if(!switch2.isChecked()){
             text2 = (TextView)findViewById(R.id.number_2);
@@ -202,6 +316,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             square2.setVisibility(View.VISIBLE);
             square2.clearAnimation();
             square2.startAnimation(a);
+            diceRolls.dice2 = numbersGenerated.get(1);
         }
         if(!switch3.isChecked()){
             text3 = (TextView)findViewById(R.id.number_3);
@@ -211,6 +326,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             square3.setVisibility(View.VISIBLE);
             square3.clearAnimation();
             square3.startAnimation(a);
+            diceRolls.dice3 = numbersGenerated.get(2);
         }
         if(!switch4.isChecked()){
             text4 = (TextView)findViewById(R.id.number_4);
@@ -220,6 +336,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             square4.setVisibility(View.VISIBLE);
             square4.clearAnimation();
             square4.startAnimation(a);
+            diceRolls.dice4 = numbersGenerated.get(3);
         }
         if(!switch5.isChecked()){
             text5 = (TextView)findViewById(R.id.number_5);
@@ -229,6 +346,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             square5.setVisibility(View.VISIBLE);
             square5.clearAnimation();
             square5.startAnimation(a);
+            diceRolls.dice5 = numbersGenerated.get(4);
         }
     }
 
