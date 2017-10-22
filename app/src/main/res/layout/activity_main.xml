@@ -455,6 +455,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Kara: "
+                android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText,InefficientWeight" />
             <TextView
                 android:id="@+id/textView16_1"
@@ -470,6 +472,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Premia: "
+                android:textColor="@android:color/holo_green_dark"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText,InefficientWeight" />
             <TextView
                 android:id="@+id/textView17_1"
@@ -485,6 +489,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="WYNIK: "
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText,InefficientWeight" />
             <TextView
                 android:id="@+id/textView18_1"
