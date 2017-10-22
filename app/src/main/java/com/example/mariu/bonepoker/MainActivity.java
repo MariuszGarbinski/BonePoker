@@ -1,6 +1,7 @@
 package com.example.mariu.bonepoker;
 
 import android.hardware.SensorManager;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.hardware.SensorEventListener;
@@ -36,6 +37,49 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 600;
     private SensorEvent sensorEvent;
+    private Toast infoToast;
+
+
+    public void showToast(String message)
+    {
+        int toastDuration = 700;
+        infoToast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        CountDownTimer toastTimer = new CountDownTimer(toastDuration,500) {
+            @Override
+            public void onTick(long l) {
+                infoToast.show();
+            }
+
+            @Override
+            public void onFinish() {
+                infoToast.cancel();
+            }
+        };
+
+        infoToast.show();
+        toastTimer.start();
+    }
+
+    private boolean checkSwitches()
+    {
+        boolean retVal = false;
+        Switch switch1 = (Switch)findViewById(R.id.switch_1);
+        Switch switch2 = (Switch)findViewById(R.id.switch_2);
+        Switch switch3 = (Switch)findViewById(R.id.switch_3);
+        Switch switch4 = (Switch)findViewById(R.id.switch_4);
+        Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        if (switch1.isChecked() &&
+                switch2.isChecked() &&
+                switch3.isChecked() &&
+                switch4.isChecked() &&
+                switch5.isChecked() )
+        {
+            retVal = true;
+        }
+        return  retVal;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -44,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         senSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        senSensorManager.registerListener((SensorEventListener) this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
+        senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
 
         final Switch switch1 = (Switch)findViewById(R.id.switch_1);
         final Switch switch2 = (Switch)findViewById(R.id.switch_2);
@@ -57,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch1.isChecked()){
-                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 1",Toast.LENGTH_LONG).show();
+                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 1");
                 }else{
-                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 1",Toast.LENGTH_LONG).show();
+                    showToast("Odblokowano kość 1");
                 }
             }
         });
@@ -69,9 +113,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch2.isChecked()){
-                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 2",Toast.LENGTH_LONG).show();
+                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 2");
                 }else{
-                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 2",Toast.LENGTH_LONG).show();
+                    showToast("Odblokowano kość 2");
                 }
             }
         });
@@ -81,9 +125,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch3.isChecked()){
-                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 3",Toast.LENGTH_LONG).show();
+                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 3");
                 }else{
-                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 3",Toast.LENGTH_LONG).show();
+                    showToast("Odblokowano kość 3");
                 }
             }
         });
@@ -93,9 +137,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch4.isChecked()){
-                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 4",Toast.LENGTH_LONG).show();
+                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 4");
                 }else{
-                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 4",Toast.LENGTH_LONG).show();
+                    showToast("Odblokowano kość 4");
                 }
             }
         });
@@ -105,12 +149,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(switch5.isChecked()){
-                    Toast.makeText(getApplicationContext(),"ZABLOKOWANA KOŚĆ 5",Toast.LENGTH_LONG).show();
+                    showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 5");
                 }else{
-                    Toast.makeText(getApplicationContext(),"ODBLOKOWANA KOŚĆ 5",Toast.LENGTH_LONG).show();
+                    showToast("Odblokowano kość 5");
                 }
             }
         });
+
+
+
     }
 
     protected void onPause() {
@@ -131,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Switch switch4 = (Switch)findViewById(R.id.switch_4);
         Switch switch5 = (Switch)findViewById(R.id.switch_5);
 
-        ArrayList numbersGenerated = new ArrayList();
+        ArrayList<Integer> numbersGenerated = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
             Random randNumber = new Random();
@@ -139,106 +186,54 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             numbersGenerated.add(iNumber);
         }
-        //Sprawdzanie czy switch jest w pozycji ON i wyłączenie odświeżania liczb
-        if(switch1.isChecked()){
-
-        }else{
-            text1 = (TextView)findViewById(R.id.number_1);
-            text1.setText(""+numbersGenerated.get(0));
-        }
-        if(switch2.isChecked()){
-
-        }else{
-            text2 = (TextView)findViewById(R.id.number_2);
-            text2.setText(""+numbersGenerated.get(1));
-        }
-        if(switch3.isChecked()){
-
-        }else{
-            text3 = (TextView)findViewById(R.id.number_3);
-            text3.setText(""+numbersGenerated.get(2));
-        }
-        if(switch4.isChecked()){
-
-        }else{
-            text4 = (TextView)findViewById(R.id.number_4);
-            text4.setText(""+numbersGenerated.get(3));
-        }
-        if(switch5.isChecked()){
-
-        }else{
-            text5 = (TextView)findViewById(R.id.number_5);
-            text5.setText(""+numbersGenerated.get(4));
-        }
-
-        //Sprawdzanie czy switch jest w pozycji ON i wyłączenie animacji kości
-        if(switch1.isChecked()){
-
-        }else{
-            square1 = (FrameLayout) findViewById(R.id.square_1);
-            square1.setVisibility(View.INVISIBLE);
-        }
-        if(switch2.isChecked()){
-
-        }else{
-            square2 = (FrameLayout) findViewById(R.id.square_2);
-            square2.setVisibility(View.INVISIBLE);
-        }
-        if(switch3.isChecked()){
-
-        }else{
-            square3 = (FrameLayout) findViewById(R.id.square_3);
-            square3.setVisibility(View.INVISIBLE);
-        }
-        if(switch4.isChecked()){
-
-        }else{
-            square4 = (FrameLayout) findViewById(R.id.square_4);
-            square4.setVisibility(View.INVISIBLE);
-        }
-        if(switch5.isChecked()){
-
-        }else{
-            square5 = (FrameLayout) findViewById(R.id.square_5);
-            square5.setVisibility(View.INVISIBLE);
-        }
-
         Animation a = AnimationUtils.loadAnimation(this, R.anim.move_down_ball_first);
 
-        if(switch5.isChecked()){
-
-        }else{
-            square5.setVisibility(View.VISIBLE);
-            square5.clearAnimation();
-            square5.startAnimation(a);
+        //Sprawdzanie czy switch jest w pozycji ON i wyłączenie odświeżania liczb
+        //Sprawdzanie czy switch jest w pozycji ON i wyłączenie animacji kości
+        if(!switch1.isChecked()){
+            text1 = (TextView)findViewById(R.id.number_1);
+            text1.setText(numbersGenerated.get(0).toString());
+            square1 = (FrameLayout) findViewById(R.id.square_1);
+            square1.setVisibility(View.INVISIBLE);
+            square1.setVisibility(View.VISIBLE);
+            square1.clearAnimation();
+            square1.startAnimation(a);
         }
-        if(switch4.isChecked()){
-
-        }else{
-            square4.setVisibility(View.VISIBLE);
-            square4.clearAnimation();
-            square4.startAnimation(a);
-        }
-        if(switch3.isChecked()){
-
-        }else{
-            square3.setVisibility(View.VISIBLE);
-            square3.clearAnimation();
-            square3.startAnimation(a);
-        }
-        if(switch2.isChecked()){
-
-        }else{
+        if(!switch2.isChecked()){
+            text2 = (TextView)findViewById(R.id.number_2);
+            text2.setText(numbersGenerated.get(1).toString());
+            square2 = (FrameLayout) findViewById(R.id.square_2);
+            square2.setVisibility(View.INVISIBLE);
             square2.setVisibility(View.VISIBLE);
             square2.clearAnimation();
             square2.startAnimation(a);
         }
-        if(switch1.isChecked()){
-
-        }else{
-            square1.setVisibility(View.VISIBLE);
-            square1.clearAnimation();
-            square1.startAnimation(a);
+        if(!switch3.isChecked()){
+            text3 = (TextView)findViewById(R.id.number_3);
+            text3.setText(numbersGenerated.get(2).toString());
+            square3 = (FrameLayout) findViewById(R.id.square_3);
+            square3.setVisibility(View.INVISIBLE);
+            square3.setVisibility(View.VISIBLE);
+            square3.clearAnimation();
+            square3.startAnimation(a);
+        }
+        if(!switch4.isChecked()){
+            text4 = (TextView)findViewById(R.id.number_4);
+            text4.setText(numbersGenerated.get(3).toString());
+            square4 = (FrameLayout) findViewById(R.id.square_4);
+            square4.setVisibility(View.INVISIBLE);
+            square4.setVisibility(View.VISIBLE);
+            square4.clearAnimation();
+            square4.startAnimation(a);
+        }
+        if(!switch5.isChecked()){
+            text5 = (TextView)findViewById(R.id.number_5);
+            text5.setText(numbersGenerated.get(4).toString());
+            square5 = (FrameLayout) findViewById(R.id.square_5);
+            square5.setVisibility(View.INVISIBLE);
+            square5.setVisibility(View.VISIBLE);
+            square5.clearAnimation();
+            square5.startAnimation(a);
         }
     }
 

@@ -77,6 +77,7 @@
         android:weightSum="6"
         android:orientation="horizontal"
         android:baselineAligned="false">
+
         <Switch
             android:id="@+id/switch_1"
             android:layout_width="wrap_content"
