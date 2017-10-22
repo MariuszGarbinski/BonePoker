@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     {
         int toastDuration = 700;
         infoToast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-        CountDownTimer toastTimer = new CountDownTimer(toastDuration,500) {
+        CountDownTimer toastTimer = new CountDownTimer(toastDuration,100) {
             @Override
             public void onTick(long l) {
                 infoToast.show();
