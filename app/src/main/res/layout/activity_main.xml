@@ -169,6 +169,35 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Zapisz"
+            tools:ignore="ButtonStyle,HardcodedText" />
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Wyczyść"
+            tools:ignore="ButtonStyle,HardcodedText" />
+
+        <Button
+            android:id="@+id/btnResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sprawdź wynik"
+            tools:ignore="ButtonStyle,HardcodedText"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:layout_gravity="center_vertical|center_horizontal"
@@ -427,6 +456,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Kara: "
+                android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText,InefficientWeight" />
             <TextView
                 android:id="@+id/textView16_1"
@@ -442,6 +473,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Premia: "
+                android:textColor="@android:color/holo_green_dark"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText,InefficientWeight" />
             <TextView
                 android:id="@+id/textView17_1"
@@ -457,6 +490,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="WYNIK: "
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText,InefficientWeight" />
             <TextView
                 android:id="@+id/textView18_1"
