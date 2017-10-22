@@ -74,6 +74,7 @@
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+        android:layout_gravity="center_vertical|center_horizontal"
         android:weightSum="6"
         android:orientation="horizontal"
         android:baselineAligned="false">
@@ -81,22 +82,19 @@
             android:id="@+id/switch_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40.25dp"
-            android:layout_marginRight="40.25dp"
+            android:layout_weight="1"
             tools:ignore="HardcodedText" />
         <Switch
             android:id="@+id/switch_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40.25dp"
-            android:layout_marginRight="40.25dp"
+            android:layout_weight="2"
             tools:ignore="HardcodedText" />
         <Switch
             android:id="@+id/switch_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40.25dp"
-            android:layout_marginRight="40.25dp"
+            android:layout_weight="2"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -151,6 +149,7 @@
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+        android:layout_gravity="center_vertical|center_horizontal"
         android:weightSum="6"
         android:orientation="horizontal"
         android:baselineAligned="false">
@@ -158,15 +157,23 @@
             android:id="@+id/switch_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="104dp"
-            android:layout_marginRight="40.25dp"
+            android:layout_weight="2"
             tools:ignore="HardcodedText,RtlHardcoded" />
         <Switch
             android:id="@+id/switch_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40.25dp"
-            android:layout_marginRight="95dp"
+            android:layout_weight="2"
             tools:ignore="HardcodedText,RtlHardcoded" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:weightSum="6"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        tools:ignore="UselessLeaf">
+
     </LinearLayout>
 </LinearLayout>
