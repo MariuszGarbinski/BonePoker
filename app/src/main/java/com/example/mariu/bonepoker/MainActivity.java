@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         return  retVal;
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
