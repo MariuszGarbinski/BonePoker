@@ -155,9 +155,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             }
         });
-
-
-
     }
 
     protected void onPause() {
