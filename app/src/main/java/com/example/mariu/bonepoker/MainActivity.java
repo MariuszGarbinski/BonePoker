@@ -1,5 +1,6 @@
 package com.example.mariu.bonepoker;
 
+import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Switch switch5 = (Switch)findViewById(R.id.switch_5);
         final Button btnSave = (Button)findViewById(R.id.btnSave);
         final Button btnClear = (Button)findViewById(R.id.btnClear);
+        final Button btnResult = (Button)findViewById(R.id.btnResult);
 
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -237,6 +239,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void onClick(View view){
                 ResetControls();
 
+            }
+        });
+
+        btnResult.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(MainActivity.this, HistoryActivity.class));
             }
         });
 
