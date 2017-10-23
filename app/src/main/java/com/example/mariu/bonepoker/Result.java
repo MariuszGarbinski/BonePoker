@@ -1,5 +1,6 @@
 package com.example.mariu.bonepoker;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,7 +11,6 @@ public class Result {
 
     //Table name
     public static final String TABLE = "Result";
-    public Date Tmstmp;
 
     public static final String KEY_ID = "id";
     public static final String KEY_D1 = "dice1";
@@ -25,4 +25,19 @@ public class Result {
     public int dice3;
     public int dice4;
     public int dice5;
+    public Date Tmstmp;
+
+    @Override
+     public String toString(){
+                String dateStr;
+                if(Tmstmp != null){
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    dateStr = sdf.format(Tmstmp);
+                }
+                else{
+                    dateStr = "Brak daty";
+                }
+                return dateStr+": "+ dice1+" "+dice2+" "+dice3+" "+dice4+" "+dice5;
+     }
+
 }

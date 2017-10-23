@@ -68,11 +68,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private boolean checkSwitches()
     {
         boolean retVal = false;
-        final Switch switch1 = (Switch)findViewById(R.id.switch_1);
-        final Switch switch2 = (Switch)findViewById(R.id.switch_2);
-        final Switch switch3 = (Switch)findViewById(R.id.switch_3);
-        final Switch switch4 = (Switch)findViewById(R.id.switch_4);
-        final Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        Switch switch1 = (Switch)findViewById(R.id.switch_1);
+        Switch switch2 = (Switch)findViewById(R.id.switch_2);
+        Switch switch3 = (Switch)findViewById(R.id.switch_3);
+        Switch switch4 = (Switch)findViewById(R.id.switch_4);
+        Switch switch5 = (Switch)findViewById(R.id.switch_5);
 
         if (switch1.isChecked() &&
                 switch2.isChecked() &&
@@ -93,6 +93,163 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
+
+        if(diceRolls == null) diceRolls = new Result();
+
+        final Switch switch1 = (Switch)findViewById(R.id.switch_1);
+        final Switch switch2 = (Switch)findViewById(R.id.switch_2);
+        final Switch switch3 = (Switch)findViewById(R.id.switch_3);
+        final Switch switch4 = (Switch)findViewById(R.id.switch_4);
+        final Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        final Button btnSave = (Button)findViewById(R.id.btnSave);
+        final Button btnClear = (Button)findViewById(R.id.btnClear);
+        final Button btnResult = (Button)findViewById(R.id.btnResult);
+
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch1.isChecked()){
+                    if(diceRolls.dice1 == 0)
+                    {
+                        switch1.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 1");
+                    }
+
+                }else{
+                    showToast("Odblokowano kość 1");
+                }
+            }
+        });
+
+        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch2.isChecked()){
+                    if(diceRolls.dice2 == 0)
+                    {
+                        switch2.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 2");
+                    }
+
+                }else{
+                    showToast("Odblokowano kość 2");
+                }
+            }
+        });
+
+        switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch3.isChecked()){
+                    if(diceRolls.dice3 == 0)
+                    {
+                        switch3.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 3");
+                    }
+
+                }else{
+                    showToast("Odblokowano kość 3");
+                }
+            }
+        });
+
+        switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch4.isChecked()){
+                    if(diceRolls.dice4 == 0)
+                    {
+                        switch4.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 4");
+                    }
+
+                }else{
+                    showToast("Odblokowano kość 4");
+                }
+            }
+        });
+
+        switch5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(switch5.isChecked()){
+                    if(diceRolls.dice5 == 0)
+                    {
+                        switch5.setChecked(false);
+                    }
+                    else
+                    {
+                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 5");
+                    }
+
+                }else{
+                    showToast("Odblokowano kość 5");
+                }
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view){
+                if (checkSwitches())
+                {
+                    if(diceRolls != null)
+                    {
+                        diceRolls.Tmstmp = new Date();
+                        ResultDBManager dbMan = new ResultDBManager(getApplicationContext());
+                        if(dbMan.insert(diceRolls) > 0)
+                        {
+                            ResetControls();
+                        }
+                        else
+                        {
+                            showToast("Błąd zapisu do bazy danych.");
+                        }
+                    }
+                }
+                else
+                {
+                    showToast("Najpierw zablokuj wszystkie kości!");
+                }
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view){
+                ResetControls();
+            }
+        });
+
+        btnResult.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view){
+                //TODO: Do zrobienia wyliczenie punktów
+                // startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+            }
+        });
+
+
     }
 
     private void ResetControls()
@@ -237,179 +394,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    public void authorsClick(View view) {
-        setContentView(R.layout.activity_authors);
 
-        TextView authors = (TextView) findViewById(R.id.txtAuthors);
-        authors.setText("Projekt graficzny i wykonanie:\n\n" +
-                "Mariusz Garbiński\n" +
-                "Piotr Sowiak\n");
-    }
 
-    public void historyClick(View view) {
-        setContentView(R.layout.activity_history);
-    }
 
-    public void playClick(View view) {
-        setContentView(R.layout.activity_start);
 
-        if(diceRolls == null) diceRolls = new Result();
 
-        final Switch switch1 = (Switch)findViewById(R.id.switch_1);
-        final Switch switch2 = (Switch)findViewById(R.id.switch_2);
-        final Switch switch3 = (Switch)findViewById(R.id.switch_3);
-        final Switch switch4 = (Switch)findViewById(R.id.switch_4);
-        final Switch switch5 = (Switch)findViewById(R.id.switch_5);
-        final Button btnSave = (Button)findViewById(R.id.btnSave);
-        final Button btnClear = (Button)findViewById(R.id.btnClear);
-        final Button btnResult = (Button)findViewById(R.id.btnResult);
 
-        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch1.isChecked()){
-                    if(diceRolls.dice1 == 0)
-                    {
-                        switch1.setChecked(true);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 1");
-                    }
 
-                }else{
-                    showToast("Odblokowano kość 1");
-                }
-            }
-        });
 
-        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch2.isChecked()){
-                    if(diceRolls.dice2 == 0)
-                    {
-                        switch2.setChecked(true);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 2");
-                    }
-
-                }else{
-                    showToast("Odblokowano kość 2");
-                }
-            }
-        });
-
-        switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch3.isChecked()){
-                    if(diceRolls.dice3 == 0)
-                    {
-                        switch3.setChecked(true);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 3");
-                    }
-
-                }else{
-                    showToast("Odblokowano kość 3");
-                }
-            }
-        });
-
-        switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch4.isChecked()){
-                    if(diceRolls.dice4 == 0)
-                    {
-                        switch4.setChecked(true);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 4");
-                    }
-
-                }else{
-                    showToast("Odblokowano kość 4");
-                }
-            }
-        });
-
-        switch5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch5.isChecked()){
-                    if(diceRolls.dice5 == 0)
-                    {
-                        switch5.setChecked(true);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 5");
-                    }
-
-                }else{
-                    showToast("Odblokowano kość 5");
-                }
-            }
-        });
-
-        btnSave.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view){
-                if (checkSwitches())
-                {
-                    if(diceRolls != null)
-                    {
-                        diceRolls.Tmstmp = new Date();
-                        ResultDBManager dbMan = new ResultDBManager(getApplicationContext());
-                        if(dbMan.insert(diceRolls) > 0)
-                        {
-                            ResetControls();
-                        }
-                        else
-                        {
-                            showToast("Błąd zapisu do bazy danych.");
-                        }
-                    }
-                }
-                else
-                {
-                    showToast("Najpierw zablokuj wszystkie kości!");
-                }
-            }
-        });
-
-        btnClear.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view){
-                ResetControls();
-
-            }
-        });
-
-        btnResult.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view){
-                startActivity(new Intent(MainActivity.this, HistoryActivity.class));
-            }
-        });
-    }
-
-    public void exitClick(View view) {
-        System.exit(0);
-    }
 }
