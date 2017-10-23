@@ -11,7 +11,8 @@
         android:layout_height="441dp"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="62dp">
+        tools:layout_editor_absoluteY="62dp"
+        tools:ignore="MissingConstraints">
 
         <ListView
             android:id="@+id/lvHistory"
@@ -25,13 +26,15 @@
         android:layout_height="59dp"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="2dp">
+        tools:layout_editor_absoluteY="2dp"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Button"
+            tools:ignore="HardcodedText,InefficientWeight" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
