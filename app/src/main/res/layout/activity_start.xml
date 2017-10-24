@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_marginTop="125dp">
+    android:background="@drawable/dice_wallpaper"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
+        android:layout_marginTop="125dp"
+        android:orientation="horizontal"
         tools:ignore="UselessParent">
 
         <Button
@@ -23,12 +24,13 @@
             android:text="GRAJ"
             tools:ignore="ButtonStyle,HardcodedText,InefficientWeight" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
+        android:orientation="horizontal"
         tools:ignore="UselessParent">
 
         <Button
@@ -44,9 +46,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
+        android:orientation="horizontal"
         tools:ignore="UselessParent">
 
         <Button
@@ -62,9 +64,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
+        android:orientation="horizontal"
         tools:ignore="UselessParent">
 
         <Button
