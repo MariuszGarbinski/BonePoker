@@ -393,15 +393,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
-
-
-
-
-
-
-
-
-
-
-
+    public void historyClick(View view) {
+        startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+    }
 }
