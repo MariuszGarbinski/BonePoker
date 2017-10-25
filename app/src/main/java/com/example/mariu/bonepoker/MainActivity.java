@@ -372,7 +372,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 long curTime = System.currentTimeMillis();
 
-                if ((curTime - lastUpdate) > 100) {
+                if ((curTime - lastUpdate) > 300) {
                     long diffTime = (curTime - lastUpdate);
                     lastUpdate = curTime;
 
