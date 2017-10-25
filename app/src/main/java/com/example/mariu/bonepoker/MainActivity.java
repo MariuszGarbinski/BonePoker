@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView text3;
     private TextView text4;
     private TextView text5;
+    private TextView textThrows;
     private FrameLayout square1;
     private FrameLayout square2;
     private FrameLayout square3;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private FrameLayout square5;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
+    private int shoots;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 600;
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
+        shoots = 3;
 
         if(diceRolls == null) diceRolls = new Result();
 
@@ -104,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Button btnSave = (Button)findViewById(R.id.btnSave);
         final Button btnClear = (Button)findViewById(R.id.btnClear);
         final Button btnResult = (Button)findViewById(R.id.btnResult);
+        final TextView textThrows = (TextView)findViewById(R.id.textThrows);
+
+        textThrows.setText(String.valueOf(shoots));
 
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -245,15 +251,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view){
                 //TODO: Do zrobienia wyliczenie punktów
-                // startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+                startActivity(new Intent(MainActivity.this, HistoryActivity.class));
             }
         });
-
-
     }
 
     private void ResetControls()
     {
+        shoots = 3;
         diceRolls = null;
         Switch switch1 = (Switch)findViewById(R.id.switch_1);
         Switch switch2 = (Switch)findViewById(R.id.switch_2);
@@ -275,7 +280,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         text3.setText("");
         text4.setText("");
         text5.setText("");
-
+        textThrows = (TextView)findViewById(R.id.textThrows);
+        textThrows.setText(String.valueOf(shoots));
     }
 
     protected void onPause() {
@@ -296,92 +302,93 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Switch switch4 = (Switch)findViewById(R.id.switch_4);
         Switch switch5 = (Switch)findViewById(R.id.switch_5);
 
-        ArrayList<Integer> numbersGenerated = new ArrayList<>();
+            ArrayList<Integer> numbersGenerated = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            Random randNumber = new Random();
-            int iNumber = randNumber.nextInt(6) + 1;
+            for (int i = 0; i < 5; i++) {
+                Random randNumber = new Random();
+                int iNumber = randNumber.nextInt(6) + 1;
 
-            numbersGenerated.add(iNumber);
-        }
-        Animation a = AnimationUtils.loadAnimation(this, R.anim.move_down_ball_first);
+                numbersGenerated.add(iNumber);
+            }
+            Animation a = AnimationUtils.loadAnimation(this, R.anim.move_down_ball_first);
 
-        //Sprawdzanie czy switch jest w pozycji ON i wyłączenie odświeżania liczb
-        //Sprawdzanie czy switch jest w pozycji ON i wyłączenie animacji kości
-        if(!switch1.isChecked()){
-            text1 = (TextView)findViewById(R.id.number_1);
-            text1.setText(numbersGenerated.get(0).toString());
-            square1 = (FrameLayout) findViewById(R.id.square_1);
-            square1.setVisibility(View.INVISIBLE);
-            square1.setVisibility(View.VISIBLE);
-            square1.clearAnimation();
-            square1.startAnimation(a);
-            diceRolls.dice1 = numbersGenerated.get(0);
-        }
-        if(!switch2.isChecked()){
-            text2 = (TextView)findViewById(R.id.number_2);
-            text2.setText(numbersGenerated.get(1).toString());
-            square2 = (FrameLayout) findViewById(R.id.square_2);
-            square2.setVisibility(View.INVISIBLE);
-            square2.setVisibility(View.VISIBLE);
-            square2.clearAnimation();
-            square2.startAnimation(a);
-            diceRolls.dice2 = numbersGenerated.get(1);
-        }
-        if(!switch3.isChecked()){
-            text3 = (TextView)findViewById(R.id.number_3);
-            text3.setText(numbersGenerated.get(2).toString());
-            square3 = (FrameLayout) findViewById(R.id.square_3);
-            square3.setVisibility(View.INVISIBLE);
-            square3.setVisibility(View.VISIBLE);
-            square3.clearAnimation();
-            square3.startAnimation(a);
-            diceRolls.dice3 = numbersGenerated.get(2);
-        }
-        if(!switch4.isChecked()){
-            text4 = (TextView)findViewById(R.id.number_4);
-            text4.setText(numbersGenerated.get(3).toString());
-            square4 = (FrameLayout) findViewById(R.id.square_4);
-            square4.setVisibility(View.INVISIBLE);
-            square4.setVisibility(View.VISIBLE);
-            square4.clearAnimation();
-            square4.startAnimation(a);
-            diceRolls.dice4 = numbersGenerated.get(3);
-        }
-        if(!switch5.isChecked()){
-            text5 = (TextView)findViewById(R.id.number_5);
-            text5.setText(numbersGenerated.get(4).toString());
-            square5 = (FrameLayout) findViewById(R.id.square_5);
-            square5.setVisibility(View.INVISIBLE);
-            square5.setVisibility(View.VISIBLE);
-            square5.clearAnimation();
-            square5.startAnimation(a);
-            diceRolls.dice5 = numbersGenerated.get(4);
-        }
+            if(!switch1.isChecked()){
+                text1 = (TextView)findViewById(R.id.number_1);
+                text1.setText(numbersGenerated.get(0).toString());
+                square1 = (FrameLayout) findViewById(R.id.square_1);
+                square1.setVisibility(View.INVISIBLE);
+                square1.setVisibility(View.VISIBLE);
+                square1.clearAnimation();
+                square1.startAnimation(a);
+                diceRolls.dice1 = numbersGenerated.get(0);
+            }
+            if(!switch2.isChecked()){
+                text2 = (TextView)findViewById(R.id.number_2);
+                text2.setText(numbersGenerated.get(1).toString());
+                square2 = (FrameLayout) findViewById(R.id.square_2);
+                square2.setVisibility(View.INVISIBLE);
+                square2.setVisibility(View.VISIBLE);
+                square2.clearAnimation();
+                square2.startAnimation(a);
+                diceRolls.dice2 = numbersGenerated.get(1);
+            }
+            if(!switch3.isChecked()){
+                text3 = (TextView)findViewById(R.id.number_3);
+                text3.setText(numbersGenerated.get(2).toString());
+                square3 = (FrameLayout) findViewById(R.id.square_3);
+                square3.setVisibility(View.INVISIBLE);
+                square3.setVisibility(View.VISIBLE);
+                square3.clearAnimation();
+                square3.startAnimation(a);
+                diceRolls.dice3 = numbersGenerated.get(2);
+            }
+            if(!switch4.isChecked()){
+                text4 = (TextView)findViewById(R.id.number_4);
+                text4.setText(numbersGenerated.get(3).toString());
+                square4 = (FrameLayout) findViewById(R.id.square_4);
+                square4.setVisibility(View.INVISIBLE);
+                square4.setVisibility(View.VISIBLE);
+                square4.clearAnimation();
+                square4.startAnimation(a);
+                diceRolls.dice4 = numbersGenerated.get(3);
+            }
+            if(!switch5.isChecked()){
+                text5 = (TextView)findViewById(R.id.number_5);
+                text5.setText(numbersGenerated.get(4).toString());
+                square5 = (FrameLayout) findViewById(R.id.square_5);
+                square5.setVisibility(View.INVISIBLE);
+                square5.setVisibility(View.VISIBLE);
+                square5.clearAnimation();
+                square5.startAnimation(a);
+                diceRolls.dice5 = numbersGenerated.get(4);
+            }
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
         Sensor mySensor = sensorEvent.sensor;
+        textThrows = (TextView) findViewById(R.id.textThrows);
 
-        if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
+        if (shoots != 0) {
+            if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                float x = sensorEvent.values[0];
+                float y = sensorEvent.values[1];
+                float z = sensorEvent.values[2];
 
-            long curTime = System.currentTimeMillis();
+                long curTime = System.currentTimeMillis();
 
-            if ((curTime - lastUpdate) > 100) {
-                long diffTime = (curTime - lastUpdate);
-                lastUpdate = curTime;
+                if ((curTime - lastUpdate) > 300) {
+                    long diffTime = (curTime - lastUpdate);
+                    lastUpdate = curTime;
 
-                float speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
-
-                if (speed > SHAKE_THRESHOLD) {
-                    getRandomNumber();
+                    float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+                    if (speed > SHAKE_THRESHOLD) {
+                        getRandomNumber();
+                        shoots -= 1;
+                        textThrows.setText(String.valueOf(shoots));
+                    }
                 }
-
                 last_x = x;
                 last_y = y;
                 last_z = z;
@@ -392,8 +399,5 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
-    }
-    public void historyClick(View view) {
-        startActivity(new Intent(MainActivity.this, HistoryActivity.class));
     }
 }
