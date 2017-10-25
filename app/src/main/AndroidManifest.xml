@@ -11,8 +11,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".AuthorsActivity"
-            android:parentActivityName=".StartActivity" />
-        <activity android:name=".StartActivity">
+            android:parentActivityName=".StartActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".StartActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,9 +23,11 @@
         </activity>
         <activity
             android:name=".HistoryActivity"
-            android:parentActivityName=".StartActivity" />
+            android:parentActivityName=".StartActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity"
-            android:parentActivityName=".StartActivity"></activity>
+            android:parentActivityName=".StartActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

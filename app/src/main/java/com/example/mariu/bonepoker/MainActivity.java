@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 600;
-    private SensorEvent sensorEvent;
     private Toast infoToast;
     private Result diceRolls;
 
@@ -96,8 +95,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
         shoots = 3;
-
-        if(diceRolls == null) diceRolls = new Result();
+        if(diceRolls == null) {
+            diceRolls = new Result();
+        }
 
         final Switch switch1 = (Switch)findViewById(R.id.switch_1);
         final Switch switch2 = (Switch)findViewById(R.id.switch_2);
@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private void ResetControls()
     {
         shoots = 3;
-        diceRolls = null;
+        diceRolls = new Result();
         Switch switch1 = (Switch)findViewById(R.id.switch_1);
         Switch switch2 = (Switch)findViewById(R.id.switch_2);
         Switch switch3 = (Switch)findViewById(R.id.switch_3);
@@ -316,7 +316,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 text1 = (TextView)findViewById(R.id.number_1);
                 text1.setText(numbersGenerated.get(0).toString());
                 square1 = (FrameLayout) findViewById(R.id.square_1);
-                square1.setVisibility(View.INVISIBLE);
                 square1.setVisibility(View.VISIBLE);
                 square1.clearAnimation();
                 square1.startAnimation(a);
@@ -326,7 +325,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 text2 = (TextView)findViewById(R.id.number_2);
                 text2.setText(numbersGenerated.get(1).toString());
                 square2 = (FrameLayout) findViewById(R.id.square_2);
-                square2.setVisibility(View.INVISIBLE);
                 square2.setVisibility(View.VISIBLE);
                 square2.clearAnimation();
                 square2.startAnimation(a);
@@ -336,7 +334,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 text3 = (TextView)findViewById(R.id.number_3);
                 text3.setText(numbersGenerated.get(2).toString());
                 square3 = (FrameLayout) findViewById(R.id.square_3);
-                square3.setVisibility(View.INVISIBLE);
                 square3.setVisibility(View.VISIBLE);
                 square3.clearAnimation();
                 square3.startAnimation(a);
@@ -346,7 +343,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 text4 = (TextView)findViewById(R.id.number_4);
                 text4.setText(numbersGenerated.get(3).toString());
                 square4 = (FrameLayout) findViewById(R.id.square_4);
-                square4.setVisibility(View.INVISIBLE);
                 square4.setVisibility(View.VISIBLE);
                 square4.clearAnimation();
                 square4.startAnimation(a);
@@ -356,7 +352,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 text5 = (TextView)findViewById(R.id.number_5);
                 text5.setText(numbersGenerated.get(4).toString());
                 square5 = (FrameLayout) findViewById(R.id.square_5);
-                square5.setVisibility(View.INVISIBLE);
                 square5.setVisibility(View.VISIBLE);
                 square5.clearAnimation();
                 square5.startAnimation(a);
@@ -370,7 +365,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Sensor mySensor = sensorEvent.sensor;
         textThrows = (TextView) findViewById(R.id.textThrows);
 
-        if (shoots != 0) {
             if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
                 float x = sensorEvent.values[0];
                 float y = sensorEvent.values[1];
@@ -378,22 +372,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 long curTime = System.currentTimeMillis();
 
-                if ((curTime - lastUpdate) > 300) {
+                if ((curTime - lastUpdate) > 100) {
                     long diffTime = (curTime - lastUpdate);
                     lastUpdate = curTime;
 
                     float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
                     if (speed > SHAKE_THRESHOLD) {
-                        getRandomNumber();
-                        shoots -= 1;
-                        textThrows.setText(String.valueOf(shoots));
+                        if(shoots > 0){
+                            getRandomNumber();
+                            shoots -= 1;
+                            textThrows.setText(String.valueOf(shoots));
+                        }
                     }
                 }
                 last_x = x;
                 last_y = y;
                 last_z = z;
             }
-        }
     }
 
     @Override
