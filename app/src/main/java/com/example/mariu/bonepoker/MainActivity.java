@@ -311,21 +311,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Switch switch3 = (Switch)findViewById(R.id.switch_3);
         Switch switch4 = (Switch)findViewById(R.id.switch_4);
         Switch switch5 = (Switch)findViewById(R.id.switch_5);
-        TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
-        TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
-        TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
-        TextView txtFours = (TextView)findViewById(R.id.textView4_1);
-        TextView txtFives = (TextView)findViewById(R.id.textView5_1);
-        TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
-        TextView txtPair = (TextView)findViewById(R.id.textView7_1);
-        TextView txtTwoPairs = (TextView)findViewById(R.id.textView8_1);
-        TextView txtThreeOfKind = (TextView)findViewById(R.id.textView9_1);
-        TextView txtLittleStraight = (TextView)findViewById(R.id.textView10_1);
-        TextView txtBigStraight = (TextView)findViewById(R.id.textView11_1);
-        TextView txtFull = (TextView)findViewById(R.id.textView12_1);
-        TextView txtFourOfKind = (TextView)findViewById(R.id.textView13_1);
-        TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
-        TextView txtChance = (TextView)findViewById(R.id.textView15_1);
+
 
         ArrayList<Integer> numbersGenerated = new ArrayList<>();
 
@@ -387,7 +373,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 diceRolls.dice5 = numbersGenerated.get(4);
                 tab[4] = numbersGenerated.get(4);
             }
+    }
 
+    private void afterUpdate() {
+
+        TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
+        TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
+        TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
+        TextView txtFours = (TextView)findViewById(R.id.textView4_1);
+        TextView txtFives = (TextView)findViewById(R.id.textView5_1);
+        TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
+        TextView txtPair = (TextView)findViewById(R.id.textView7_1);
+        TextView txtTwoPairs = (TextView)findViewById(R.id.textView8_1);
+        TextView txtThreeOfKind = (TextView)findViewById(R.id.textView9_1);
+        TextView txtLittleStraight = (TextView)findViewById(R.id.textView10_1);
+        TextView txtBigStraight = (TextView)findViewById(R.id.textView11_1);
+        TextView txtFull = (TextView)findViewById(R.id.textView12_1);
+        TextView txtFourOfKind = (TextView)findViewById(R.id.textView13_1);
+        TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
+        TextView txtChance = (TextView)findViewById(R.id.textView15_1);
 
         int iOnes = 0;
         int iTwos = 0;
@@ -415,30 +419,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if(tab[i] == 6) iSixes++;
         }
 
-        for (int i = 1; i < tabTemp.length; i++) {
-            int j = i;
-            while (j > 0 && compare(j - 1, j) > 0) {
-                int temp = tabTemp[j];
-                tabTemp[j] = tabTemp[j - 1];
-                tabTemp[j - 1] = temp;
-                j--;
+        for (int i = 0; i < tabTemp.length; i++) {
+            int pmin = i;
+            for(int j = i; j < tabTemp.length; j++){
+                if(tabTemp[j] < tabTemp[pmin]) pmin = j;
+                int temp = tabTemp[pmin];
+                tabTemp[pmin] = tabTemp[i];
+                tabTemp[i] = temp;
             }
         }
 
-        if( (((tabTemp[0] == tabTemp[1]) && (tabTemp[1] == tabTemp[2])) &&
-                (tabTemp[3] == tabTemp[4]) &&
-                (tabTemp[2] != tabTemp[3])) ||
-                ((tabTemp[0] == tabTemp[1]) &&
-                        ((tabTemp[2] == tabTemp[3]) && (tabTemp[3] == tabTemp[4])) &&
-                        (tabTemp[1] != tabTemp[2])) )
-        {
+        if((((tabTemp[0] == tabTemp[1]) && (tabTemp[1] == tabTemp[2])) && (tabTemp[3] == tabTemp[4])) && (tabTemp[2] != tabTemp[3])){
+            iFullHouse = (tabTemp[0] + tabTemp[1] + tabTemp[2] + tabTemp[3] + tabTemp[4]) + 10;
+        }else if(((tabTemp[0] == tabTemp[1]) && ((tabTemp[2] == tabTemp[3]) && (tabTemp[3] == tabTemp[4]))) && (tabTemp[1] != tabTemp[2])) {
             iFullHouse = (tabTemp[0] + tabTemp[1] + tabTemp[2] + tabTemp[3] + tabTemp[4]) + 10;
         }
 
-        if( (((tabTemp[0] == tabTemp[1]) && (tabTemp[2] == tabTemp[3]) &&
-                (tabTemp[1] != tabTemp[2]))))
-        {
+
+        if(((tabTemp[0] == tabTemp[1]) && (tabTemp[2] == tabTemp[3])) && (tabTemp[1] != tabTemp[2])){
             iTwoPair = tabTemp[0] + tabTemp[1] + tabTemp[2] + tabTemp[3];
+        }else if (((tabTemp[1] == tabTemp[2]) && (tabTemp[3] == tabTemp[4])) && (tabTemp[2] != tabTemp[3])){
+            iTwoPair = tabTemp[1] + tabTemp[2] + tabTemp[3] + tabTemp[4];
+        }else if (((tabTemp[0] == tabTemp[1]) && (tabTemp[3] == tabTemp[4])) && (tabTemp[1] != tabTemp[3])){
+            iTwoPair = tabTemp[0] + tabTemp[1] + tabTemp[3] + tabTemp[4];
         }
 
         switch (iOnes){
@@ -609,6 +612,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     if (speed > SHAKE_THRESHOLD) {
                         if(shoots > 0){
                             getRandomNumber();
+                            afterUpdate();
                             shoots -= 1;
                             textThrows.setText(String.valueOf(shoots));
                         }
