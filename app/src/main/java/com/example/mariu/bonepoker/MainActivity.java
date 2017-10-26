@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static final int SHAKE_THRESHOLD = 600;
     private Toast infoToast;
     private Result diceRolls;
-
+    int[] tab = new int[5];
 
     public void showToast(String message)
     {
@@ -301,8 +301,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Switch switch3 = (Switch)findViewById(R.id.switch_3);
         Switch switch4 = (Switch)findViewById(R.id.switch_4);
         Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
+        TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
+        TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
+        TextView txtFours = (TextView)findViewById(R.id.textView4_1);
+        TextView txtFives = (TextView)findViewById(R.id.textView5_1);
+        TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
 
-            ArrayList<Integer> numbersGenerated = new ArrayList<>();
+
+        TextView txtThreeOfKind = (TextView)findViewById(R.id.textView9_1);
+        TextView txtLittleStraight = (TextView)findViewById(R.id.textView10_1);
+        TextView txtBigStraight = (TextView)findViewById(R.id.textView11_1);
+        TextView txtFull = (TextView)findViewById(R.id.textView12_1);
+        TextView txtFourOfKind = (TextView)findViewById(R.id.textView13_1);
+        TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
+        TextView txtChance = (TextView)findViewById(R.id.textView15_1);
+
+        ArrayList<Integer> numbersGenerated = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
                 Random randNumber = new Random();
@@ -320,6 +335,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 square1.clearAnimation();
                 square1.startAnimation(a);
                 diceRolls.dice1 = numbersGenerated.get(0);
+                tab[0] = numbersGenerated.get(0);
             }
             if(!switch2.isChecked()){
                 text2 = (TextView)findViewById(R.id.number_2);
@@ -329,6 +345,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 square2.clearAnimation();
                 square2.startAnimation(a);
                 diceRolls.dice2 = numbersGenerated.get(1);
+                tab[1] = numbersGenerated.get(1);
             }
             if(!switch3.isChecked()){
                 text3 = (TextView)findViewById(R.id.number_3);
@@ -338,6 +355,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 square3.clearAnimation();
                 square3.startAnimation(a);
                 diceRolls.dice3 = numbersGenerated.get(2);
+                tab[2] = numbersGenerated.get(2);
             }
             if(!switch4.isChecked()){
                 text4 = (TextView)findViewById(R.id.number_4);
@@ -347,6 +365,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 square4.clearAnimation();
                 square4.startAnimation(a);
                 diceRolls.dice4 = numbersGenerated.get(3);
+                tab[3] = numbersGenerated.get(3);
             }
             if(!switch5.isChecked()){
                 text5 = (TextView)findViewById(R.id.number_5);
@@ -356,7 +375,129 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 square5.clearAnimation();
                 square5.startAnimation(a);
                 diceRolls.dice5 = numbersGenerated.get(4);
+                tab[4] = numbersGenerated.get(4);
             }
+
+
+        int iOnes = 0;
+        int iTwos = 0;
+        int iThrees = 0;
+        int iFours = 0;
+        int iFives = 0;
+        int iSixes = 0;
+
+        int iPair = 0;
+        int iTwoPair = 0;
+        int iThreeOfKind = 0;
+        int iFourOfKind = 0;
+        int iFullHouse = 0;
+        int iLittleStraight = 0;
+        int iBigStraight = 0;
+        int iYathzee = 0;
+
+
+            for(int i = 0; i < tab.length; i++){
+                if(tab[i] == 1) iOnes++;
+                if(tab[i] == 2) iTwos++;
+                if(tab[i] == 3) iThrees++;
+                if(tab[i] == 4) iFours++;
+                if(tab[i] == 5) iFives++;
+                if(tab[i] == 6) iSixes++;
+            }
+
+
+        switch (iOnes){
+            case 3:
+                iThreeOfKind = (iOnes * 1);
+                break;
+            case 4:
+                iFourOfKind = (iOnes * 1);
+                break;
+            case 5:
+                iYathzee = (iOnes * 1) + 50;
+                break;
+        }
+        switch (iTwos){
+            case 3:
+                iThreeOfKind = (iTwos * 2);
+                break;
+            case 4:
+                iFourOfKind = (iTwos * 2);
+                break;
+            case 5:
+                iYathzee = (iTwos * 2) + 50;
+                break;
+        }
+        switch (iThrees){
+            case 3:
+                iThreeOfKind = (iThrees * 3);
+                break;
+            case 4:
+                iFourOfKind = (iThrees * 3);
+                break;
+            case 5:
+                iYathzee = (iThrees * 3) + 50;
+                break;
+        }
+        switch (iFours){
+            case 3:
+                iThreeOfKind = (iFours * 4);
+                break;
+            case 4:
+                iFourOfKind = (iFours * 4);
+                break;
+            case 5:
+                iYathzee = (iFours * 4) + 50;
+                break;
+        }
+        switch (iFives){
+            case 3:
+                iThreeOfKind = (iFives * 5);
+                break;
+            case 4:
+                iFourOfKind = (iFives * 5);
+                break;
+            case 5:
+                iYathzee = (iFives * 5) + 50;
+                break;
+        }
+        switch (iSixes){
+            case 3:
+                iThreeOfKind = (iSixes * 6);
+                break;
+            case 4:
+                iFourOfKind = (iSixes * 6);
+                break;
+            case 5:
+                iYathzee = (iSixes * 6) + 50;
+                break;
+        }
+        if(iOnes == 1 && iTwos == 1 && iThrees == 1 & iFours == 1 && iFives == 1){
+            iLittleStraight = 15;
+        }
+
+        if(iTwos == 1 && iThrees == 1 & iFours == 1 && iFives == 1 && iSixes == 1){
+            iBigStraight = 20;
+        }
+        //if(iOne == 5 || iTwo == 5 || iThree == 5 || iFour == 5 || iFive == 5 || iSix == 5){
+        //    iYathzee = ((iOne * 1) + (iTwo * 2) + (iThree * 3) + (iFour * 4) + (iFive * 5) + (iSix * 6)) + 50;
+        //}
+
+        txtOnes.setText(String.valueOf(iOnes * 1));
+        txtTwos.setText(String.valueOf(iTwos * 2));
+        txtThrees.setText(String.valueOf(iThrees * 3));
+        txtFours.setText(String.valueOf(iFours * 4));
+        txtFives.setText(String.valueOf(iFives * 5));
+        txtSixs.setText(String.valueOf(iSixes * 6));
+
+
+        txtThreeOfKind.setText(String.valueOf(iThreeOfKind));
+        txtLittleStraight.setText(String.valueOf(iLittleStraight));
+        txtBigStraight.setText(String.valueOf(iBigStraight));
+        txtFourOfKind.setText(String.valueOf(iFourOfKind));
+
+        txtYathzee.setText(String.valueOf(iYathzee));
+        txtChance.setText(String.valueOf((iOnes * 1) + (iTwos * 2) + (iThrees * 3) + (iFours * 4) + (iFives * 5) + (iSixes *6)));
     }
 
     @Override
@@ -372,7 +513,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 long curTime = System.currentTimeMillis();
 
-                if ((curTime - lastUpdate) > 300) {
+                if ((curTime - lastUpdate) > 100) {
                     long diffTime = (curTime - lastUpdate);
                     lastUpdate = curTime;
 
