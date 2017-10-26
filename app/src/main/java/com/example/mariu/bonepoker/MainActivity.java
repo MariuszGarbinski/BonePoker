@@ -8,9 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.hardware.SensorEventListener;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
+
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,6 +29,8 @@ import android.widget.TextView;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.widget.Toast;
+
+import static java.lang.Integer.compare;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -45,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Toast infoToast;
     private Result diceRolls;
     int[] tab = new int[5];
+    int[] tabTemp = new int[5];
 
     public void showToast(String message)
     {
@@ -395,16 +405,41 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         int iBigStraight = 0;
         int iYathzee = 0;
 
+        for(int i = 0; i < tab.length; i++){
+            tabTemp[i] = tab[i];
+            if(tab[i] == 1) iOnes++;
+            if(tab[i] == 2) iTwos++;
+            if(tab[i] == 3) iThrees++;
+            if(tab[i] == 4) iFours++;
+            if(tab[i] == 5) iFives++;
+            if(tab[i] == 6) iSixes++;
+        }
 
-            for(int i = 0; i < tab.length; i++){
-                if(tab[i] == 1) iOnes++;
-                if(tab[i] == 2) iTwos++;
-                if(tab[i] == 3) iThrees++;
-                if(tab[i] == 4) iFours++;
-                if(tab[i] == 5) iFives++;
-                if(tab[i] == 6) iSixes++;
+        for (int i = 1; i < tabTemp.length; i++) {
+            int j = i;
+            while (j > 0 && compare(j - 1, j) > 0) {
+                int temp = tabTemp[j];
+                tabTemp[j] = tabTemp[j - 1];
+                tabTemp[j - 1] = temp;
+                j--;
             }
+        }
 
+        if( (((tabTemp[0] == tabTemp[1]) && (tabTemp[1] == tabTemp[2])) &&
+                (tabTemp[3] == tabTemp[4]) &&
+                (tabTemp[2] != tabTemp[3])) ||
+                ((tabTemp[0] == tabTemp[1]) &&
+                        ((tabTemp[2] == tabTemp[3]) && (tabTemp[3] == tabTemp[4])) &&
+                        (tabTemp[1] != tabTemp[2])) )
+        {
+            iFullHouse = (tabTemp[0] + tabTemp[1] + tabTemp[2] + tabTemp[3] + tabTemp[4]) + 10;
+        }
+
+        if( (((tabTemp[0] == tabTemp[1]) && (tabTemp[2] == tabTemp[3]) &&
+                (tabTemp[1] != tabTemp[2]))))
+        {
+            iTwoPair = tabTemp[0] + tabTemp[1] + tabTemp[2] + tabTemp[3];
+        }
 
         switch (iOnes){
             case 2:
@@ -526,6 +561,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 iYathzee = (iSixes * 6) + 50;
                 break;
         }
+
+
         if(iOnes == 1 && iTwos == 1 && iThrees == 1 & iFours == 1 && iFives == 1){
             iLittleStraight = 15;
         }
@@ -541,12 +578,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         txtFives.setText(String.valueOf(iFives * 5));
         txtSixs.setText(String.valueOf(iSixes * 6));
         txtPair.setText(String.valueOf(iPair));
-
+        txtTwoPairs.setText(String.valueOf(iTwoPair));
         txtThreeOfKind.setText(String.valueOf(iThreeOfKind));
         txtLittleStraight.setText(String.valueOf(iLittleStraight));
         txtBigStraight.setText(String.valueOf(iBigStraight));
+        txtFull.setText(String.valueOf(iFullHouse));
         txtFourOfKind.setText(String.valueOf(iFourOfKind));
-
         txtYathzee.setText(String.valueOf(iYathzee));
         txtChance.setText(String.valueOf((iOnes * 1) + (iTwos * 2) + (iThrees * 3) + (iFours * 4) + (iFives * 5) + (iSixes *6)));
     }
@@ -564,7 +601,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 long curTime = System.currentTimeMillis();
 
-                if ((curTime - lastUpdate) > 300) {
+                if ((curTime - lastUpdate) > 100) {
                     long diffTime = (curTime - lastUpdate);
                     lastUpdate = curTime;
 
