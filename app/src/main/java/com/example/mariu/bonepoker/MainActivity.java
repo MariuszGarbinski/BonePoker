@@ -307,8 +307,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TextView txtFours = (TextView)findViewById(R.id.textView4_1);
         TextView txtFives = (TextView)findViewById(R.id.textView5_1);
         TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
-
-
+        TextView txtPair = (TextView)findViewById(R.id.textView7_1);
+        TextView txtTwoPairs = (TextView)findViewById(R.id.textView8_1);
         TextView txtThreeOfKind = (TextView)findViewById(R.id.textView9_1);
         TextView txtLittleStraight = (TextView)findViewById(R.id.textView10_1);
         TextView txtBigStraight = (TextView)findViewById(R.id.textView11_1);
@@ -407,6 +407,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
         switch (iOnes){
+            case 2:
+                iPair = (iOnes * 1);
+                break;
             case 3:
                 iThreeOfKind = (iOnes * 1);
                 break;
@@ -418,6 +421,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
         }
         switch (iTwos){
+            case 2:
+                iPair = (iTwos * 2);
+                break;
             case 3:
                 iThreeOfKind = (iTwos * 2);
                 break;
@@ -429,6 +435,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
         }
         switch (iThrees){
+            case 2:
+                iPair = (iThrees * 2);
+                break;
             case 3:
                 iThreeOfKind = (iThrees * 3);
                 break;
@@ -440,6 +449,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
         }
         switch (iFours){
+            case 2:
+                iPair = (iFours * 2);
+                break;
             case 3:
                 iThreeOfKind = (iFours * 4);
                 break;
@@ -451,6 +463,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
         }
         switch (iFives){
+            case 2:
+                iPair = (iFives * 2);
+                break;
             case 3:
                 iThreeOfKind = (iFives * 5);
                 break;
@@ -462,6 +477,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
         }
         switch (iSixes){
+            case 2:
+                iPair = (iSixes * 2);
+                break;
             case 3:
                 iThreeOfKind = (iSixes * 6);
                 break;
@@ -479,9 +497,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(iTwos == 1 && iThrees == 1 & iFours == 1 && iFives == 1 && iSixes == 1){
             iBigStraight = 20;
         }
-        //if(iOne == 5 || iTwo == 5 || iThree == 5 || iFour == 5 || iFive == 5 || iSix == 5){
-        //    iYathzee = ((iOne * 1) + (iTwo * 2) + (iThree * 3) + (iFour * 4) + (iFive * 5) + (iSix * 6)) + 50;
-        //}
 
         txtOnes.setText(String.valueOf(iOnes * 1));
         txtTwos.setText(String.valueOf(iTwos * 2));
@@ -489,7 +504,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         txtFours.setText(String.valueOf(iFours * 4));
         txtFives.setText(String.valueOf(iFives * 5));
         txtSixs.setText(String.valueOf(iSixes * 6));
-
+        txtPair.setText(String.valueOf(iPair));
 
         txtThreeOfKind.setText(String.valueOf(iThreeOfKind));
         txtLittleStraight.setText(String.valueOf(iLittleStraight));
@@ -513,7 +528,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 long curTime = System.currentTimeMillis();
 
-                if ((curTime - lastUpdate) > 100) {
+                if ((curTime - lastUpdate) > 300) {
                     long diffTime = (curTime - lastUpdate);
                     lastUpdate = curTime;
 
