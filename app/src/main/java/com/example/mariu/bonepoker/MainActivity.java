@@ -422,7 +422,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case 5:
                 iPair = (iOnes * 1) - 3;
                 iThreeOfKind = (iOnes * 1) - 2;
-                iFourOfKind = (iOnes * 1) - 1;
+                iFourOfKind = ((iOnes * 1) - 1) + 20;
                 iYathzee = (iOnes * 1) + 50;
                 break;
         }
@@ -442,7 +442,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case 5:
                 iPair = (iTwos * 2) - 6;
                 iThreeOfKind = (iTwos * 2) - 4;
-                iFourOfKind = (iTwos * 2) - 2;
+                iFourOfKind = ((iTwos * 2) - 2) + 20;
                 iYathzee = (iTwos * 2) + 50;
                 break;
         }
@@ -462,7 +462,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case 5:
                 iPair = (iThrees * 3) - 9;
                 iThreeOfKind = (iThrees * 3) - 6;
-                iFourOfKind = (iThrees * 3) - 3;
+                iFourOfKind = ((iThrees * 3) - 3) + 20;
                 iYathzee = (iThrees * 3) + 50;
                 break;
         }
@@ -482,7 +482,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case 5:
                 iPair = (iFours * 4) - 12;
                 iThreeOfKind = (iFours * 4) - 8;
-                iFourOfKind = (iFours * 4) - 4;
+                iFourOfKind = ((iFours * 4) - 4) + 20;
                 iYathzee = (iFours * 4) + 50;
                 break;
         }
@@ -502,7 +502,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case 5:
                 iPair = (iFives * 5) - 15;
                 iThreeOfKind = (iFives * 5) - 10;
-                iFourOfKind = (iFives * 5) - 5;
+                iFourOfKind = ((iFives * 5) - 5) + 20;
                 iYathzee = (iFives * 5) + 50;
                 break;
         }
@@ -522,7 +522,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case 5:
                 iPair = (iSixes * 6) - 18;
                 iThreeOfKind = (iSixes * 6) - 12;
-                iFourOfKind = (iSixes * 6) - 6;
+                iFourOfKind = ((iSixes * 6) - 6) + 20;
                 iYathzee = (iSixes * 6) + 50;
                 break;
         }
