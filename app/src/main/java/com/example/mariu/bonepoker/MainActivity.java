@@ -411,12 +411,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 iPair = (iOnes * 1);
                 break;
             case 3:
+                iPair = (iOnes * 1) - 1;
                 iThreeOfKind = (iOnes * 1);
                 break;
             case 4:
+                iPair = (iOnes * 1) - 2;
+                iThreeOfKind = (iOnes * 1) - 1;
                 iFourOfKind = (iOnes * 1);
                 break;
             case 5:
+                iPair = (iOnes * 1) - 3;
+                iThreeOfKind = (iOnes * 1) - 2;
+                iFourOfKind = (iOnes * 1) - 1;
                 iYathzee = (iOnes * 1) + 50;
                 break;
         }
@@ -425,68 +431,98 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 iPair = (iTwos * 2);
                 break;
             case 3:
+                iPair = (iTwos * 2) - 2;
                 iThreeOfKind = (iTwos * 2);
                 break;
             case 4:
+                iPair = (iTwos * 2) - 4;
+                iThreeOfKind = (iTwos * 2) - 2;
                 iFourOfKind = (iTwos * 2);
                 break;
             case 5:
+                iPair = (iTwos * 2) - 6;
+                iThreeOfKind = (iTwos * 2) - 4;
+                iFourOfKind = (iTwos * 2) - 2;
                 iYathzee = (iTwos * 2) + 50;
                 break;
         }
         switch (iThrees){
             case 2:
-                iPair = (iThrees * 2);
+                iPair = (iThrees * 3);
                 break;
             case 3:
+                iPair = (iThrees * 3) - 3;
                 iThreeOfKind = (iThrees * 3);
                 break;
             case 4:
+                iPair = (iThrees * 3) - 6;
+                iThreeOfKind = (iThrees * 3) - 3;
                 iFourOfKind = (iThrees * 3);
                 break;
             case 5:
+                iPair = (iThrees * 3) - 9;
+                iThreeOfKind = (iThrees * 3) - 6;
+                iFourOfKind = (iThrees * 3) - 3;
                 iYathzee = (iThrees * 3) + 50;
                 break;
         }
         switch (iFours){
             case 2:
-                iPair = (iFours * 2);
+                iPair = (iFours * 4);
                 break;
             case 3:
+                iPair = (iFours * 4) - 4;
                 iThreeOfKind = (iFours * 4);
                 break;
             case 4:
+                iPair = (iFours * 4) - 8;
+                iThreeOfKind = (iFours * 4) - 4;
                 iFourOfKind = (iFours * 4);
                 break;
             case 5:
+                iPair = (iFours * 4) - 12;
+                iThreeOfKind = (iFours * 4) - 8;
+                iFourOfKind = (iFours * 4) - 4;
                 iYathzee = (iFours * 4) + 50;
                 break;
         }
         switch (iFives){
             case 2:
-                iPair = (iFives * 2);
+                iPair = (iFives * 5);
                 break;
             case 3:
+                iPair = (iFives * 5) - 5;
                 iThreeOfKind = (iFives * 5);
                 break;
             case 4:
+                iPair = (iFives * 5) - 10;
+                iThreeOfKind = (iFives * 5) - 5;
                 iFourOfKind = (iFives * 5);
                 break;
             case 5:
+                iPair = (iFives * 5) - 15;
+                iThreeOfKind = (iFives * 5) - 10;
+                iFourOfKind = (iFives * 5) - 5;
                 iYathzee = (iFives * 5) + 50;
                 break;
         }
         switch (iSixes){
             case 2:
-                iPair = (iSixes * 2);
+                iPair = (iSixes * 6);
                 break;
             case 3:
+                iPair = (iSixes * 6) - 6;
                 iThreeOfKind = (iSixes * 6);
                 break;
             case 4:
+                iPair = (iSixes * 6) - 12;
+                iThreeOfKind = (iSixes * 6) - 6;
                 iFourOfKind = (iSixes * 6);
                 break;
             case 5:
+                iPair = (iSixes * 6) - 18;
+                iThreeOfKind = (iSixes * 6) - 12;
+                iFourOfKind = (iSixes * 6) - 6;
                 iYathzee = (iSixes * 6) + 50;
                 break;
         }
