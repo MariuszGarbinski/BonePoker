@@ -1,22 +1,14 @@
 package com.example.mariu.bonepoker;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.hardware.SensorEventListener;
-
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 import android.view.View;
 import android.view.animation.Animation;
@@ -29,8 +21,6 @@ import android.widget.TextView;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.widget.Toast;
-
-import static java.lang.Integer.compare;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -54,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Toast infoToast;
     private Result diceRolls;
     int[] tab = new int[5];
-    int[] tabTemp = new int[5];
 
     public void showToast(String message)
     {
@@ -410,38 +399,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         int iYathzee = 0;
 
         for(int i = 0; i < tab.length; i++){
-            tabTemp[i] = tab[i];
             if(tab[i] == 1) iOnes++;
             if(tab[i] == 2) iTwos++;
             if(tab[i] == 3) iThrees++;
             if(tab[i] == 4) iFours++;
             if(tab[i] == 5) iFives++;
             if(tab[i] == 6) iSixes++;
-        }
-
-        for (int i = 0; i < tabTemp.length; i++) {
-            int pmin = i;
-            for(int j = i; j < tabTemp.length; j++){
-                if(tabTemp[j] < tabTemp[pmin]) pmin = j;
-                int temp = tabTemp[pmin];
-                tabTemp[pmin] = tabTemp[i];
-                tabTemp[i] = temp;
-            }
-        }
-
-        if((((tabTemp[0] == tabTemp[1]) && (tabTemp[1] == tabTemp[2])) && (tabTemp[3] == tabTemp[4])) && (tabTemp[2] != tabTemp[3])){
-            iFullHouse = (tabTemp[0] + tabTemp[1] + tabTemp[2] + tabTemp[3] + tabTemp[4]) + 10;
-        }else if(((tabTemp[0] == tabTemp[1]) && ((tabTemp[2] == tabTemp[3]) && (tabTemp[3] == tabTemp[4]))) && (tabTemp[1] != tabTemp[2])) {
-            iFullHouse = (tabTemp[0] + tabTemp[1] + tabTemp[2] + tabTemp[3] + tabTemp[4]) + 10;
-        }
-
-
-        if(((tabTemp[0] == tabTemp[1]) && (tabTemp[2] == tabTemp[3])) && (tabTemp[1] != tabTemp[2])){
-            iTwoPair = tabTemp[0] + tabTemp[1] + tabTemp[2] + tabTemp[3];
-        }else if (((tabTemp[1] == tabTemp[2]) && (tabTemp[3] == tabTemp[4])) && (tabTemp[2] != tabTemp[3])){
-            iTwoPair = tabTemp[1] + tabTemp[2] + tabTemp[3] + tabTemp[4];
-        }else if (((tabTemp[0] == tabTemp[1]) && (tabTemp[3] == tabTemp[4])) && (tabTemp[1] != tabTemp[3])){
-            iTwoPair = tabTemp[0] + tabTemp[1] + tabTemp[3] + tabTemp[4];
         }
 
         switch (iOnes){
@@ -563,6 +526,70 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 iFourOfKind = ((iSixes * 6) - 6) + 20;
                 iYathzee = (iSixes * 6) + 50;
                 break;
+        }
+
+        if (iOnes >= 2 && iTwos >= 2){
+            iTwoPair = 6;
+        }else if(iOnes >= 2 && iThrees >= 2){
+            iTwoPair = 8;
+        }else if(iOnes >= 2 && iFours >= 2){
+            iTwoPair = 10;
+        }else if(iOnes >= 2 && iFives >= 2){
+            iTwoPair = 12;
+        }else if(iOnes >= 2 && iSixes >= 2){
+            iTwoPair = 14;
+        }else if(iTwos >= 2 && iThrees >= 2){
+            iTwoPair = 10;
+        }else if(iTwos >= 2 && iFours >= 2){
+            iTwoPair = 12;
+        }else if(iTwos >= 2 && iFives >= 2){
+            iTwoPair = 14;
+        }else if(iTwos >= 2 && iSixes >= 2){
+            iTwoPair = 16;
+        }else if(iThrees >= 2 && iFours >= 2){
+            iTwoPair = 14;
+        }else if(iThrees >= 2 && iFives >= 2){
+            iTwoPair = 16;
+        }else if(iThrees >= 2 && iSixes >= 2){
+            iTwoPair = 18;
+        }else if(iFours >= 2 && iFives >= 2){
+            iTwoPair = 18;
+        }else if(iFours >= 2 && iSixes >= 2){
+            iTwoPair = 20;
+        }else if(iFives >= 2 && iSixes >= 2){
+            iTwoPair = 22;
+        }
+
+        if ((iOnes == 2 && iTwos == 3) || (iOnes == 3 && iTwos == 2)){
+            iFullHouse = (iOnes + (iTwos * 2)) + 10;
+        }else if ((iOnes == 2 && iThrees == 3) || (iOnes == 3 && iThrees == 2)){
+            iFullHouse = (iOnes + (iThrees * 3)) + 10;
+        }else if ((iOnes == 2 && iFours == 3) || (iOnes == 3 && iFours == 2)){
+            iFullHouse = (iOnes + (iFours * 4)) + 10;
+        }else if ((iOnes == 2 && iFives == 3) || (iOnes == 3 && iFives == 2)){
+            iFullHouse = (iOnes + (iFives * 5)) + 10;
+        }else if ((iOnes == 2 && iSixes == 3) || (iOnes == 3 && iSixes == 2)){
+            iFullHouse = (iOnes + (iSixes * 6)) + 10;
+        }else if ((iTwos == 2 && iThrees == 3) || (iTwos == 3 && iThrees == 2)){
+            iFullHouse = ((iTwos * 2) + (iThrees * 3)) + 10;
+        }else if ((iTwos == 2 && iFours == 3) || (iTwos == 3 && iFours == 2)){
+            iFullHouse = ((iTwos * 2) + (iFours * 4)) + 10;
+        }else if ((iTwos == 2 && iFives == 3) || (iTwos == 3 && iFives == 2)){
+            iFullHouse = ((iTwos * 2) + (iFives * 5)) + 10;
+        }else if ((iTwos == 2 && iSixes == 3) || (iTwos == 3 && iSixes == 2)){
+            iFullHouse = ((iTwos * 2) + (iSixes * 6)) + 10;
+        }else if ((iThrees == 2 && iFours == 3) || (iThrees == 3 && iFours == 2)){
+            iFullHouse = ((iThrees * 3) + (iFours * 4)) + 10;
+        }else if ((iThrees == 2 && iFives == 3) || (iThrees == 3 && iFives == 2)){
+            iFullHouse = ((iThrees * 3) + (iFives * 5)) + 10;
+        }else if ((iThrees == 2 && iSixes == 3) || (iThrees == 3 && iSixes == 2)){
+            iFullHouse = ((iThrees * 3) + (iSixes * 6)) + 10;
+        }else if ((iFours == 2 && iFives == 3) || (iFours == 3 && iFives == 2)){
+            iFullHouse = ((iFours * 4) + (iFives * 5)) + 10;
+        }else if ((iFours == 2 && iSixes == 3) || (iFours == 3 && iSixes == 2)){
+            iFullHouse = ((iFours * 4) + (iSixes * 6)) + 10;
+        }else if ((iFives == 2 && iSixes == 3) || (iFives == 3 && iSixes == 2)){
+            iFullHouse = ((iFives * 5) + (iSixes * 6)) + 10;
         }
 
 
