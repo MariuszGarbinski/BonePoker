@@ -957,15 +957,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (bFours != false) txtFours.setText(String.valueOf(iFours * 4));
         if (bFives != false) txtFives.setText(String.valueOf(iFives * 5));
         if (bSixs != false) txtSixs.setText(String.valueOf(iSixes * 6));
-        txtPair.setText(String.valueOf(iPair));
-        txtTwoPairs.setText(String.valueOf(iTwoPair));
-        txtThreeOfKind.setText(String.valueOf(iThreeOfKind));
-        txtLittleStraight.setText(String.valueOf(iLittleStraight));
-        txtBigStraight.setText(String.valueOf(iBigStraight));
-        txtFull.setText(String.valueOf(iFullHouse));
-        txtFourOfKind.setText(String.valueOf(iFourOfKind));
-        txtYathzee.setText(String.valueOf(iYathzee));
-        txtChance.setText(String.valueOf((iOnes * 1) + (iTwos * 2) + (iThrees * 3) + (iFours * 4) + (iFives * 5) + (iSixes *6)));
+        if (bPair != false) txtPair.setText(String.valueOf(iPair));
+        if (bTwoPairs != false) txtTwoPairs.setText(String.valueOf(iTwoPair));
+        if (bThreeOfKind != false) txtThreeOfKind.setText(String.valueOf(iThreeOfKind));
+        if (bLitleStraight != false) txtLittleStraight.setText(String.valueOf(iLittleStraight));
+        if (bBigStraight != false) txtBigStraight.setText(String.valueOf(iBigStraight));
+        if (bFullHouse != false) txtFull.setText(String.valueOf(iFullHouse));
+        if (bFourOfKind != false) txtFourOfKind.setText(String.valueOf(iFourOfKind));
+        if (bYathzee != false) txtYathzee.setText(String.valueOf(iYathzee));
+        if (bChance != false) txtChance.setText(String.valueOf((iOnes * 1) + (iTwos * 2) + (iThrees * 3) + (iFours * 4) + (iFives * 5) + (iSixes *6)));
     }
 
     @Override
