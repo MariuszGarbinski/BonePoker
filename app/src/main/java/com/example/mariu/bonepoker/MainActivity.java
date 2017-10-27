@@ -123,16 +123,38 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final TextView txtFivess = (TextView)findViewById(R.id.textView5_1);
         final TextView lblSixs = (TextView)findViewById(R.id.textView6);
         final TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
+        final TextView lblPair = (TextView)findViewById(R.id.textView7);
+        final TextView txtPair = (TextView)findViewById(R.id.textView7_1);
+        final TextView lblTwoPairs = (TextView)findViewById(R.id.textView8);
+        final TextView txtTwoPairs = (TextView)findViewById(R.id.textView8_1);
+        final TextView lblThreeOfKind = (TextView)findViewById(R.id.textView9);
+        final TextView txtThreeOfKind = (TextView)findViewById(R.id.textView9_1);
+        final TextView lblLitleStraight = (TextView)findViewById(R.id.textView10);
+        final TextView txtLitleStraight = (TextView)findViewById(R.id.textView10_1);
+        final TextView lblBigStraight = (TextView)findViewById(R.id.textView11);
+        final TextView txtBigStraight = (TextView)findViewById(R.id.textView11_1);
+        final TextView lblFullHouse = (TextView)findViewById(R.id.textView12);
+        final TextView txtFullHouse = (TextView)findViewById(R.id.textView12_1);
+        final TextView lblFoureOfKind = (TextView)findViewById(R.id.textView13);
+        final TextView txtFoureOfKind = (TextView)findViewById(R.id.textView13_1);
+        final TextView lblYathzee = (TextView)findViewById(R.id.textView14);
+        final TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
+        final TextView lblChance = (TextView)findViewById(R.id.textView15);
+        final TextView txtChance = (TextView)findViewById(R.id.textView15_1);
+        final TextView txtToatal = (TextView)findViewById(R.id.textView16_1);
 
 
         textThrows.setText(String.valueOf(shoots));
 
+        //Tablica wyników
         lblOnes.setOnClickListener(new TextView.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                int num1;
-                num1 = Integer.parseInt(txtOnes.getText().toString());
+                int sum = Integer.parseInt(txtToatal.getText().toString());
+                int num1 = Integer.parseInt(txtOnes.getText().toString());
+                int total = sum + num1;
+                txtToatal.setText(String.valueOf(total));
                 if (num1 != 0){
                     txtOnes.setTextColor(Color.rgb(0,204,0));
                 }else{
@@ -145,8 +167,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num2;
-                num2 = Integer.parseInt(txtTwos.getText().toString());
+                int num2 = Integer.parseInt(txtTwos.getText().toString());
                 if (num2 != 0){
                     txtTwos.setTextColor(Color.rgb(0,204,0));
                 }else{
@@ -159,8 +180,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num3;
-                num3 = Integer.parseInt(txtThrees.getText().toString());
+                int num3 = Integer.parseInt(txtThrees.getText().toString());
                 if (num3 != 0){
                     txtThrees.setTextColor(Color.rgb(0,204,0));
                 }else{
@@ -173,8 +193,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num4;
-                num4 = Integer.parseInt(txtFours.getText().toString());
+                int num4 = Integer.parseInt(txtFours.getText().toString());
                 if (num4 != 0){
                     txtFours.setTextColor(Color.rgb(0,204,0));
                 }else{
@@ -187,8 +206,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num5;
-                num5 = Integer.parseInt(txtFivess.getText().toString());
+                int num5 = Integer.parseInt(txtFivess.getText().toString());
                 if (num5 != 0){
                     txtFivess.setTextColor(Color.rgb(0,204,0));
                 }else{
@@ -201,8 +219,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num6;
-                num6 = Integer.parseInt(txtSixs.getText().toString());
+                int num6 = Integer.parseInt(txtSixs.getText().toString());
                 if (num6 != 0){
                     txtSixs.setTextColor(Color.rgb(0,204,0));
                 }else{
@@ -211,6 +228,129 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+        lblPair.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num7 = Integer.parseInt(txtPair.getText().toString());
+                if (num7 != 0){
+                    txtPair.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtPair.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblTwoPairs.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num8 = Integer.parseInt(txtTwoPairs.getText().toString());
+                if (num8 != 0){
+                    txtTwoPairs.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtTwoPairs.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblThreeOfKind.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num9 = Integer.parseInt(txtThreeOfKind.getText().toString());
+                if (num9 != 0){
+                    txtThreeOfKind.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtThreeOfKind.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblLitleStraight.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num10 = Integer.parseInt(txtLitleStraight.getText().toString());
+                if (num10 != 0){
+                    txtLitleStraight.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtLitleStraight.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblBigStraight.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num11 = Integer.parseInt(txtBigStraight.getText().toString());
+                if (num11 != 0){
+                    txtBigStraight.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtBigStraight.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblFullHouse.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num12 = Integer.parseInt(txtFullHouse.getText().toString());
+                if (num12 != 0){
+                    txtFullHouse.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtFullHouse.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblFoureOfKind.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num13 = Integer.parseInt(txtFoureOfKind.getText().toString());
+                if (num13 != 0){
+                    txtFoureOfKind.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtFoureOfKind.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblYathzee.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num14 = Integer.parseInt(txtYathzee.getText().toString());
+                if (num14 != 0){
+                    txtYathzee.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtYathzee.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblChance.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num15 = Integer.parseInt(txtChance.getText().toString());
+                if (num15 != 0){
+                    txtChance.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtChance.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+        //WYNIK
+
+        //int num16 = num1 + num2 + num3 + num4 + num5 + num6 + num7 + num8 + num9 + num10 + num11 + num12 + num13 + num14 + num15;
+        //txtToatl.setText(String.valueOf(num16));
+
+
+        //Przełączniki
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
