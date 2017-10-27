@@ -1,6 +1,8 @@
 package com.example.mariu.bonepoker;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.SensorManager;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -85,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         return  retVal;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -107,8 +111,105 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Button btnClear = (Button)findViewById(R.id.btnClear);
         final Button btnResult = (Button)findViewById(R.id.btnResult);
         final TextView textThrows = (TextView)findViewById(R.id.textThrows);
+        final TextView lblOnes = (TextView)findViewById(R.id.textView1);
+        final TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
+        final TextView lblTwos = (TextView)findViewById(R.id.textView2);
+        final TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
+        final TextView lblThrees = (TextView)findViewById(R.id.textView3);
+        final TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
+        final TextView lblFours = (TextView)findViewById(R.id.textView4);
+        final TextView txtFours = (TextView)findViewById(R.id.textView4_1);
+        final TextView lblFivess = (TextView)findViewById(R.id.textView5);
+        final TextView txtFivess = (TextView)findViewById(R.id.textView5_1);
+        final TextView lblSixs = (TextView)findViewById(R.id.textView6);
+        final TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
+
 
         textThrows.setText(String.valueOf(shoots));
+
+        lblOnes.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num1;
+                num1 = Integer.parseInt(txtOnes.getText().toString());
+                if (num1 != 0){
+                    txtOnes.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtOnes.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblTwos.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num2;
+                num2 = Integer.parseInt(txtTwos.getText().toString());
+                if (num2 != 0){
+                    txtTwos.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtTwos.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblThrees.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num3;
+                num3 = Integer.parseInt(txtThrees.getText().toString());
+                if (num3 != 0){
+                    txtThrees.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtThrees.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblFours.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num4;
+                num4 = Integer.parseInt(txtFours.getText().toString());
+                if (num4 != 0){
+                    txtFours.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtFours.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblFivess.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num5;
+                num5 = Integer.parseInt(txtFivess.getText().toString());
+                if (num5 != 0){
+                    txtFivess.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtFivess.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
+
+        lblSixs.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                int num6;
+                num6 = Integer.parseInt(txtSixs.getText().toString());
+                if (num6 != 0){
+                    txtSixs.setTextColor(Color.rgb(0,204,0));
+                }else{
+                    txtSixs.setTextColor(Color.rgb(255,0,0));
+                }
+            }
+        });
 
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
