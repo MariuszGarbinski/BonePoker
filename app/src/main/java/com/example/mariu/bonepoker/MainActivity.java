@@ -47,6 +47,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Toast infoToast;
     private Result diceRolls;
     int[] tab = new int[5];
+    private boolean bOnes = true;
+    private boolean bTwos = true;
+    private boolean bThrees = true;
+    private boolean bFours = true;
+    private boolean bFives = true;
+    private boolean bSixs = true;
+    private boolean bPair = true;
+    private boolean bTwoPairs = true;
+    private boolean bThreeOfKind = true;
+    private boolean bLitleStraight = true;
+    private boolean bBigStraight = true;
+    private boolean bFullHouse = true;
+    private boolean bFourOfKind = true;
+    private boolean bYathzee = true;
+    private boolean bChance = true;
+
+    private int total;
+
 
     public void showToast(String message)
     {
@@ -108,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Switch switch4 = (Switch)findViewById(R.id.switch_4);
         final Switch switch5 = (Switch)findViewById(R.id.switch_5);
         final Button btnSave = (Button)findViewById(R.id.btnSave);
-        final Button btnClear = (Button)findViewById(R.id.btnClear);
         final Button btnResult = (Button)findViewById(R.id.btnResult);
         final TextView textThrows = (TextView)findViewById(R.id.textThrows);
         final TextView lblOnes = (TextView)findViewById(R.id.textView1);
@@ -141,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
         final TextView lblChance = (TextView)findViewById(R.id.textView15);
         final TextView txtChance = (TextView)findViewById(R.id.textView15_1);
-        final TextView txtToatal = (TextView)findViewById(R.id.textView16_1);
+        final TextView txtTotal = (TextView)findViewById(R.id.textView16_1);
 
 
         textThrows.setText(String.valueOf(shoots));
@@ -151,15 +168,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int sum = Integer.parseInt(txtToatal.getText().toString());
                 int num1 = Integer.parseInt(txtOnes.getText().toString());
-                int total = sum + num1;
-                txtToatal.setText(String.valueOf(total));
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num1;
+                txtTotal.setText(String.valueOf(total));
+                bOnes = false;
                 if (num1 != 0){
                     txtOnes.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtOnes.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -168,11 +187,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num2 = Integer.parseInt(txtTwos.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num2;
+                txtTotal.setText(String.valueOf(total));
+                bTwos = false;
                 if (num2 != 0){
                     txtTwos.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtTwos.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -181,11 +205,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num3 = Integer.parseInt(txtThrees.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num3;
+                txtTotal.setText(String.valueOf(total));
+                bThrees = false;
                 if (num3 != 0){
                     txtThrees.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtThrees.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -194,11 +223,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num4 = Integer.parseInt(txtFours.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num4;
+                txtTotal.setText(String.valueOf(total));
+                bFours = false;
                 if (num4 != 0){
                     txtFours.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtFours.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -207,11 +241,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num5 = Integer.parseInt(txtFivess.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num5;
+                txtTotal.setText(String.valueOf(total));
+                bFives = false;
                 if (num5 != 0){
                     txtFivess.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtFivess.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -220,11 +259,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num6 = Integer.parseInt(txtSixs.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num6;
+                txtTotal.setText(String.valueOf(total));
+                bSixs = false;
                 if (num6 != 0){
                     txtSixs.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtSixs.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -233,11 +277,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num7 = Integer.parseInt(txtPair.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num7;
+                txtTotal.setText(String.valueOf(total));
+                bPair = false;
                 if (num7 != 0){
                     txtPair.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtPair.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -246,11 +295,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num8 = Integer.parseInt(txtTwoPairs.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num8;
+                txtTotal.setText(String.valueOf(total));
+                bTwoPairs = false;
                 if (num8 != 0){
                     txtTwoPairs.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtTwoPairs.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -259,11 +313,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num9 = Integer.parseInt(txtThreeOfKind.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num9;
+                txtTotal.setText(String.valueOf(total));
+                bThreeOfKind = false;
                 if (num9 != 0){
                     txtThreeOfKind.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtThreeOfKind.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -272,11 +331,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num10 = Integer.parseInt(txtLitleStraight.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num10;
+                txtTotal.setText(String.valueOf(total));
+                bLitleStraight = false;
                 if (num10 != 0){
                     txtLitleStraight.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtLitleStraight.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -285,11 +349,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num11 = Integer.parseInt(txtBigStraight.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num11;
+                txtTotal.setText(String.valueOf(total));
+                bBigStraight = false;
                 if (num11 != 0){
                     txtBigStraight.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtBigStraight.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -298,11 +367,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num12 = Integer.parseInt(txtFullHouse.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num12;
+                txtTotal.setText(String.valueOf(total));
+                bFullHouse = false;
                 if (num12 != 0){
                     txtFullHouse.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtFullHouse.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -311,11 +385,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num13 = Integer.parseInt(txtFoureOfKind.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num13;
+                txtTotal.setText(String.valueOf(total));
+                bFourOfKind = false;
                 if (num13 != 0){
                     txtFoureOfKind.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtFoureOfKind.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -324,11 +403,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num14 = Integer.parseInt(txtYathzee.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num14;
+                txtTotal.setText(String.valueOf(total));
+                bYathzee = false;
                 if (num14 != 0){
                     txtYathzee.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtYathzee.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
 
@@ -337,18 +421,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view) {
                 int num15 = Integer.parseInt(txtChance.getText().toString());
+                int sum = Integer.parseInt(txtTotal.getText().toString());
+                total = sum + num15;
+                txtTotal.setText(String.valueOf(total));
+                bChance = false;
                 if (num15 != 0){
                     txtChance.setTextColor(Color.rgb(0,204,0));
                 }else{
                     txtChance.setTextColor(Color.rgb(255,0,0));
                 }
+                ResetControls();
             }
         });
-        //WYNIK
-
-        //int num16 = num1 + num2 + num3 + num4 + num5 + num6 + num7 + num8 + num9 + num10 + num11 + num12 + num13 + num14 + num15;
-        //txtToatl.setText(String.valueOf(num16));
-
 
         //Przełączniki
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -478,14 +562,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        btnClear.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view){
-                ResetControls();
-            }
-        });
-
         btnResult.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -498,6 +574,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void ResetControls()
     {
+        TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
+        TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
+        TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
+        TextView txtFours = (TextView)findViewById(R.id.textView4_1);
+        TextView txtFives = (TextView)findViewById(R.id.textView5_1);
+        TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
+        TextView txtPair = (TextView)findViewById(R.id.textView7_1);
+        TextView txtTwoPairs = (TextView)findViewById(R.id.textView8_1);
+        TextView txtThreeOfKind = (TextView)findViewById(R.id.textView9_1);
+        TextView txtLittleStraight = (TextView)findViewById(R.id.textView10_1);
+        TextView txtBigStraight = (TextView)findViewById(R.id.textView11_1);
+        TextView txtFull = (TextView)findViewById(R.id.textView12_1);
+        TextView txtFourOfKind = (TextView)findViewById(R.id.textView13_1);
+        TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
+        TextView txtChance = (TextView)findViewById(R.id.textView15_1);
+
         shoots = 3;
         diceRolls = new Result();
         Switch switch1 = (Switch)findViewById(R.id.switch_1);
@@ -520,6 +612,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         text3.setText("");
         text4.setText("");
         text5.setText("");
+
+        if (bOnes != false) txtOnes.setText("0");
+        if (bTwos != false) txtTwos.setText("0");
+        if (bThrees != false) txtThrees.setText("0");
+        if (bFours != false) txtFours.setText("0");
+        if (bFives != false) txtFives.setText("0");
+        if (bSixs != false) txtSixs.setText("0");
+        if (bPair != false) txtPair.setText("0");
+        if (bTwoPairs != false) txtTwoPairs.setText("0");
+        if (bThreeOfKind != false) txtThreeOfKind.setText("0");
+        if (bLitleStraight != false) txtLittleStraight.setText("0");
+        if (bBigStraight != false) txtBigStraight.setText("0");
+        if (bFullHouse != false) txtFull.setText("0");
+        if (bFourOfKind != false) txtFourOfKind.setText("0");
+        if (bYathzee != false) txtYathzee.setText("0");
+        if (bChance != false) txtChance.setText("0");
+
         textThrows = (TextView)findViewById(R.id.textThrows);
         textThrows.setText(String.valueOf(shoots));
     }
@@ -842,12 +951,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             iBigStraight = 20;
         }
 
-        txtOnes.setText(String.valueOf(iOnes * 1));
-        txtTwos.setText(String.valueOf(iTwos * 2));
-        txtThrees.setText(String.valueOf(iThrees * 3));
-        txtFours.setText(String.valueOf(iFours * 4));
-        txtFives.setText(String.valueOf(iFives * 5));
-        txtSixs.setText(String.valueOf(iSixes * 6));
+        if (bOnes != false) txtOnes.setText(String.valueOf(iOnes * 1));
+        if (bTwos != false) txtTwos.setText(String.valueOf(iTwos * 2));
+        if (bThrees != false) txtThrees.setText(String.valueOf(iThrees * 3));
+        if (bFours != false) txtFours.setText(String.valueOf(iFours * 4));
+        if (bFives != false) txtFives.setText(String.valueOf(iFives * 5));
+        if (bSixs != false) txtSixs.setText(String.valueOf(iSixes * 6));
         txtPair.setText(String.valueOf(iPair));
         txtTwoPairs.setText(String.valueOf(iTwoPair));
         txtThreeOfKind.setText(String.valueOf(iThreeOfKind));
