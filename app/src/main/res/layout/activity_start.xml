@@ -52,12 +52,12 @@
         tools:ignore="UselessParent">
 
         <Button
-            android:id="@+id/btnAuthors"
+            android:id="@+id/btnInstruction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="authorsClick"
-            android:text="AUTORZY"
+            android:onClick="instructionClick"
+            android:text="INSTRUKCJA"
             tools:ignore="ButtonStyle,HardcodedText,InefficientWeight" />
     </LinearLayout>
 
@@ -70,12 +70,12 @@
         tools:ignore="UselessParent">
 
         <Button
-            android:id="@+id/btnInstruction"
+            android:id="@+id/btnAuthors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="instructionClick"
-            android:text="INSTRUKCJA"
+            android:onClick="authorsClick"
+            android:text="AUTORZY"
             tools:ignore="ButtonStyle,HardcodedText,InefficientWeight" />
     </LinearLayout>
 
