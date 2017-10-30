@@ -7,14 +7,15 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Poker Kościany"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="true">
         <activity
             android:name=".AuthorsActivity"
             android:parentActivityName=".StartActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".StartActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,12 +24,16 @@
         <activity
             android:name=".HistoryActivity"
             android:parentActivityName=".StartActivity"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity"
             android:parentActivityName=".StartActivity"
-            android:screenOrientation="portrait"></activity>
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".InstructionActivity"
             android:parentActivityName=".StartActivity"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
     </application>
 
