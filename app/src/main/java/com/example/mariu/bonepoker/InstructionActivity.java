@@ -12,8 +12,6 @@ public class InstructionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instruction);
 
         TextView instruction = (TextView) findViewById(R.id.txtInstruction);
-        instruction.setText("INSTRUKCJA:\n\n" +
-                "\n" +
-                "\n");
+        instruction.setText("INSTRUKCJA:\n\n");
     }
 }
