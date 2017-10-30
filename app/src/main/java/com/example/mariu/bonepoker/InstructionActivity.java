@@ -9,7 +9,7 @@ public class InstructionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authors);
+        setContentView(R.layout.activity_instruction);
 
         TextView instruction = (TextView) findViewById(R.id.txtInstruction);
         instruction.setText("INSTRUKCJA:\n\n" +
