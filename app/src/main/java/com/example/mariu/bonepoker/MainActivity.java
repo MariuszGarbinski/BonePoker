@@ -28,6 +28,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private TextView textThrows;
+    private TextView textRounds;
     private FrameLayout square1;
     private FrameLayout square2;
     private FrameLayout square3;
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
         shoots = 3;
-        rounds = 16;
+        rounds = 15;
         if(diceRolls == null) {
             diceRolls = new Result();
         }
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Switch switch4 = (Switch)findViewById(R.id.switch_4);
         final Switch switch5 = (Switch)findViewById(R.id.switch_5);
         final Button btnSave = (Button)findViewById(R.id.btnSave);
-        final Button btnResult = (Button)findViewById(R.id.btnResult);
+        final Button btnNewGame = (Button)findViewById(R.id.btnNewGame);
         final TextView textRounds = (TextView)findViewById(R.id.textRounds);
         final TextView textThrows = (TextView)findViewById(R.id.textThrows);
         final TextView lblOnes = (TextView)findViewById(R.id.textView1);
@@ -161,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         textThrows.setText(String.valueOf(shoots));
         textRounds.setText(String.valueOf(rounds));
+        btnSave.setEnabled(false);
 
         //Tablica wyników
         lblOnes.setOnClickListener(new TextView.OnClickListener(){
@@ -538,35 +540,57 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         {
             @Override
             public void onClick(View view){
-                if (checkSwitches())
+
+                diceRolls.Tmstmp = new Date();
+                ResultDBManager dbMan = new ResultDBManager(getApplicationContext());
+                if(dbMan.insert(diceRolls) > 0)
                 {
-                    if(diceRolls != null)
-                    {
-                        diceRolls.Tmstmp = new Date();
-                        ResultDBManager dbMan = new ResultDBManager(getApplicationContext());
-                        if(dbMan.insert(diceRolls) > 0)
-                        {
-                            ResetControls();
-                        }
-                        else
-                        {
-                            showToast("Błąd zapisu do bazy danych.");
-                        }
-                    }
-                }
-                else
-                {
-                    showToast("Najpierw zablokuj wszystkie kości!");
+                    ResetControls();
+                }else{
+                    showToast("Błąd zapisu do bazy danych.");
                 }
             }
         });
 
-        btnResult.setOnClickListener(new View.OnClickListener()
+        btnNewGame.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view){
-                //TODO: Do zrobienia wyliczenie punktów
-                startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+                rounds = 16;
+                btnNewGame.setEnabled(false);
+                bOnes = true;
+                bTwos = true;
+                bThrees = true;
+                bFours = true;
+                bFives = true;
+                bSixs = true;
+                bPair = true;
+                bTwoPairs = true;
+                bThreeOfKind = true;
+                bLitleStraight = true;
+                bBigStraight = true;
+                bFullHouse = true;
+                bFourOfKind = true;
+                bYathzee = true;
+                bChance = true;
+                txtTotal.setText("0");
+                txtOnes.setTextColor(Color.rgb(224,224,224));
+                txtTwos.setTextColor(Color.rgb(224,224,224));
+                txtThrees.setTextColor(Color.rgb(224,224,224));
+                txtFours.setTextColor(Color.rgb(224,224,224));
+                txtFivess.setTextColor(Color.rgb(224,224,224));
+                txtSixs.setTextColor(Color.rgb(224,224,224));
+                txtPair.setTextColor(Color.rgb(224,224,224));
+                txtTwoPairs.setTextColor(Color.rgb(224,224,224));
+                txtThreeOfKind.setTextColor(Color.rgb(224,224,224));
+                txtLitleStraight.setTextColor(Color.rgb(224,224,224));
+                txtBigStraight.setTextColor(Color.rgb(224,224,224));
+                txtFullHouse.setTextColor(Color.rgb(224,224,224));
+                txtFoureOfKind.setTextColor(Color.rgb(224,224,224));
+                txtYathzee.setTextColor(Color.rgb(224,224,224));
+                txtChance.setTextColor(Color.rgb(224,224,224));
+                ResetControls();
+
             }
         });
     }
@@ -594,9 +618,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TextView txtFourOfKind = (TextView)findViewById(R.id.textView13_1);
         TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
         TextView txtChance = (TextView)findViewById(R.id.textView15_1);
+        Button btnSave = (Button)findViewById(R.id.btnSave);
 
         shoots = 3;
         rounds -= 1;
+        if (rounds == 0) btnSave.setEnabled(true);
         diceRolls = new Result();
         Switch switch1 = (Switch)findViewById(R.id.switch_1);
         Switch switch2 = (Switch)findViewById(R.id.switch_2);
@@ -627,6 +653,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         textThrows = (TextView)findViewById(R.id.textThrows);
         textThrows.setText(String.valueOf(shoots));
+
+        textRounds = (TextView)findViewById(R.id.textRounds);
+        textRounds.setText(String.valueOf(rounds));
     }
 
     protected void onPause() {
@@ -1054,11 +1083,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (bChance != false) txtChance.setText(String.valueOf((iOnes * 1) + (iTwos * 2) + (iThrees * 3) + (iFours * 4) + (iFives * 5) + (iSixes *6)));
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
         Sensor mySensor = sensorEvent.sensor;
         textThrows = (TextView) findViewById(R.id.textThrows);
+        Button btnSave = (Button)findViewById(R.id.btnSave);
 
             if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
                 float x = sensorEvent.values[0];
@@ -1067,7 +1098,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 long curTime = System.currentTimeMillis();
 
-                if ((curTime - lastUpdate) > 100) {
+                if ((curTime - lastUpdate) > 300) {
                     long diffTime = (curTime - lastUpdate);
                     lastUpdate = curTime;
 
@@ -1081,7 +1112,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                 textThrows.setText(String.valueOf(shoots));
                             }
                         }
-
                     }
                 }
                 last_x = x;

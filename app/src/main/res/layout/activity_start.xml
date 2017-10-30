@@ -70,6 +70,24 @@
         tools:ignore="UselessParent">
 
         <Button
+            android:id="@+id/btnInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="instructionClick"
+            android:text="INSTRUKCJA"
+            tools:ignore="ButtonStyle,HardcodedText,InefficientWeight" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <Button
             android:id="@+id/btnClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

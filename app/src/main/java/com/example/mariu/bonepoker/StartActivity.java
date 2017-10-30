@@ -27,6 +27,10 @@ public class StartActivity extends AppCompatActivity {
         startActivity(new Intent(StartActivity.this, AuthorsActivity.class));
     }
 
+    public void instructionClick(View view) {
+        startActivity(new Intent(StartActivity.this, InstructionActivity.class));
+    }
+
     public void exitClick(View view) {
         System.exit(0);
     }

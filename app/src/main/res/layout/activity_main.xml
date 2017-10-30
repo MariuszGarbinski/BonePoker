@@ -10,18 +10,19 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/btnNewGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nowa Gra"
+            tools:ignore="ButtonStyle,HardcodedText" />
+
+        <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Zapisz"
-            tools:ignore="ButtonStyle,HardcodedText" />
-        <Button
-            android:id="@+id/btnResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Sprawdź wynik"
+            android:text="Zapisz Wynik"
             tools:ignore="ButtonStyle,HardcodedText" />
     </LinearLayout>
 
