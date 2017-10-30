@@ -4,15 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.CountDownTimer;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.hardware.SensorEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -27,11 +27,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
-    private TextView text1;
-    private TextView text2;
-    private TextView text3;
-    private TextView text4;
-    private TextView text5;
     private TextView textThrows;
     private FrameLayout square1;
     private FrameLayout square2;
@@ -41,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
     private int shoots;
+    private int rounds;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 600;
@@ -116,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
         shoots = 3;
+        rounds = 16;
         if(diceRolls == null) {
             diceRolls = new Result();
         }
@@ -127,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Switch switch5 = (Switch)findViewById(R.id.switch_5);
         final Button btnSave = (Button)findViewById(R.id.btnSave);
         final Button btnResult = (Button)findViewById(R.id.btnResult);
+        final TextView textRounds = (TextView)findViewById(R.id.textRounds);
         final TextView textThrows = (TextView)findViewById(R.id.textThrows);
         final TextView lblOnes = (TextView)findViewById(R.id.textView1);
         final TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
@@ -162,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
         textThrows.setText(String.valueOf(shoots));
+        textRounds.setText(String.valueOf(rounds));
 
         //Tablica wyników
         lblOnes.setOnClickListener(new TextView.OnClickListener(){
@@ -574,6 +573,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void ResetControls()
     {
+        square1.setBackgroundResource(R.drawable.square);
+        square2.setBackgroundResource(R.drawable.square);
+        square3.setBackgroundResource(R.drawable.square);
+        square4.setBackgroundResource(R.drawable.square);
+        square5.setBackgroundResource(R.drawable.square);
+
         TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
         TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
         TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
@@ -591,6 +596,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TextView txtChance = (TextView)findViewById(R.id.textView15_1);
 
         shoots = 3;
+        rounds -= 1;
         diceRolls = new Result();
         Switch switch1 = (Switch)findViewById(R.id.switch_1);
         Switch switch2 = (Switch)findViewById(R.id.switch_2);
@@ -602,16 +608,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         switch3.setChecked(false);
         switch4.setChecked(false);
         switch5.setChecked(false);
-        text1 = (TextView)findViewById(R.id.number_1);
-        text2 = (TextView)findViewById(R.id.number_2);
-        text3 = (TextView)findViewById(R.id.number_3);
-        text4 = (TextView)findViewById(R.id.number_4);
-        text5 = (TextView)findViewById(R.id.number_5);
-        text1.setText("");
-        text2.setText("");
-        text3.setText("");
-        text4.setText("");
-        text5.setText("");
 
         if (bOnes != false) txtOnes.setText("0");
         if (bTwos != false) txtTwos.setText("0");
@@ -643,6 +639,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void getRandomNumber() {
 
         Switch switch1 = (Switch)findViewById(R.id.switch_1);
@@ -650,7 +647,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Switch switch3 = (Switch)findViewById(R.id.switch_3);
         Switch switch4 = (Switch)findViewById(R.id.switch_4);
         Switch switch5 = (Switch)findViewById(R.id.switch_5);
-
 
         ArrayList<Integer> numbersGenerated = new ArrayList<>();
 
@@ -663,9 +659,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Animation a = AnimationUtils.loadAnimation(this, R.anim.move_down_ball_first);
 
             if(!switch1.isChecked()){
-                text1 = (TextView)findViewById(R.id.number_1);
-                text1.setText(numbersGenerated.get(0).toString());
                 square1 = (FrameLayout) findViewById(R.id.square_1);
+                switch (numbersGenerated.get(0)){
+                    case 1:
+                        square1.setBackgroundResource(R.drawable.bone1);
+                        break;
+                    case 2:
+                        square1.setBackgroundResource(R.drawable.bone2);
+                        break;
+                    case 3:
+                        square1.setBackgroundResource(R.drawable.bone3);
+                        break;
+                    case 4:
+                        square1.setBackgroundResource(R.drawable.bone4);
+                        break;
+                    case 5:
+                        square1.setBackgroundResource(R.drawable.bone5);
+                        break;
+                    case 6:
+                        square1.setBackgroundResource(R.drawable.bone6);
+                        break;
+                }
                 square1.setVisibility(View.VISIBLE);
                 square1.clearAnimation();
                 square1.startAnimation(a);
@@ -673,9 +687,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 tab[0] = numbersGenerated.get(0);
             }
             if(!switch2.isChecked()){
-                text2 = (TextView)findViewById(R.id.number_2);
-                text2.setText(numbersGenerated.get(1).toString());
                 square2 = (FrameLayout) findViewById(R.id.square_2);
+                switch (numbersGenerated.get(1)){
+                    case 1:
+                        square2.setBackgroundResource(R.drawable.bone1);
+                        break;
+                    case 2:
+                        square2.setBackgroundResource(R.drawable.bone2);
+                        break;
+                    case 3:
+                        square2.setBackgroundResource(R.drawable.bone3);
+                        break;
+                    case 4:
+                        square2.setBackgroundResource(R.drawable.bone4);
+                        break;
+                    case 5:
+                        square2.setBackgroundResource(R.drawable.bone5);
+                        break;
+                    case 6:
+                        square2.setBackgroundResource(R.drawable.bone6);
+                        break;
+                }
                 square2.setVisibility(View.VISIBLE);
                 square2.clearAnimation();
                 square2.startAnimation(a);
@@ -683,9 +715,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 tab[1] = numbersGenerated.get(1);
             }
             if(!switch3.isChecked()){
-                text3 = (TextView)findViewById(R.id.number_3);
-                text3.setText(numbersGenerated.get(2).toString());
                 square3 = (FrameLayout) findViewById(R.id.square_3);
+                switch (numbersGenerated.get(2)){
+                    case 1:
+                        square3.setBackgroundResource(R.drawable.bone1);
+                        break;
+                    case 2:
+                        square3.setBackgroundResource(R.drawable.bone2);
+                        break;
+                    case 3:
+                        square3.setBackgroundResource(R.drawable.bone3);
+                        break;
+                    case 4:
+                        square3.setBackgroundResource(R.drawable.bone4);
+                        break;
+                    case 5:
+                        square3.setBackgroundResource(R.drawable.bone5);
+                        break;
+                    case 6:
+                        square3.setBackgroundResource(R.drawable.bone6);
+                        break;
+                }
                 square3.setVisibility(View.VISIBLE);
                 square3.clearAnimation();
                 square3.startAnimation(a);
@@ -693,9 +743,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 tab[2] = numbersGenerated.get(2);
             }
             if(!switch4.isChecked()){
-                text4 = (TextView)findViewById(R.id.number_4);
-                text4.setText(numbersGenerated.get(3).toString());
                 square4 = (FrameLayout) findViewById(R.id.square_4);
+                switch (numbersGenerated.get(3)){
+                    case 1:
+                        square4.setBackgroundResource(R.drawable.bone1);
+                        break;
+                    case 2:
+                        square4.setBackgroundResource(R.drawable.bone2);
+                        break;
+                    case 3:
+                        square4.setBackgroundResource(R.drawable.bone3);
+                        break;
+                    case 4:
+                        square4.setBackgroundResource(R.drawable.bone4);
+                        break;
+                    case 5:
+                        square4.setBackgroundResource(R.drawable.bone5);
+                        break;
+                    case 6:
+                        square4.setBackgroundResource(R.drawable.bone6);
+                        break;
+                }
                 square4.setVisibility(View.VISIBLE);
                 square4.clearAnimation();
                 square4.startAnimation(a);
@@ -703,9 +771,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 tab[3] = numbersGenerated.get(3);
             }
             if(!switch5.isChecked()){
-                text5 = (TextView)findViewById(R.id.number_5);
-                text5.setText(numbersGenerated.get(4).toString());
                 square5 = (FrameLayout) findViewById(R.id.square_5);
+                switch (numbersGenerated.get(4)){
+                    case 1:
+                        square5.setBackgroundResource(R.drawable.bone1);
+                        break;
+                    case 2:
+                        square5.setBackgroundResource(R.drawable.bone2);
+                        break;
+                    case 3:
+                        square5.setBackgroundResource(R.drawable.bone3);
+                        break;
+                    case 4:
+                        square5.setBackgroundResource(R.drawable.bone4);
+                        break;
+                    case 5:
+                        square5.setBackgroundResource(R.drawable.bone5);
+                        break;
+                    case 6:
+                        square5.setBackgroundResource(R.drawable.bone6);
+                        break;
+                }
                 square5.setVisibility(View.VISIBLE);
                 square5.clearAnimation();
                 square5.startAnimation(a);
@@ -987,12 +1073,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                     float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
                     if (speed > SHAKE_THRESHOLD) {
-                        if(shoots > 0){
-                            getRandomNumber();
-                            afterUpdate();
-                            shoots -= 1;
-                            textThrows.setText(String.valueOf(shoots));
+                        if(rounds > 0){
+                            if(shoots > 0){
+                                getRandomNumber();
+                                afterUpdate();
+                                shoots -= 1;
+                                textThrows.setText(String.valueOf(shoots));
+                            }
                         }
+
                     }
                 }
                 last_x = x;
