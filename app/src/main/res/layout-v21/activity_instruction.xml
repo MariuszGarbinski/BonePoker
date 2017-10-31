@@ -4,6 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginTop="5dp"
+    android:background="?android:attr/colorAccent"
     android:orientation="vertical">
 
     <LinearLayout
@@ -21,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/darker_gray"
             android:textSize="20sp" />
     </LinearLayout>
 </LinearLayout>
