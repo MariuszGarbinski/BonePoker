@@ -14,11 +14,18 @@ public class InstructionActivity extends AppCompatActivity {
         TextView instruction = (TextView) findViewById(R.id.txtInstruction);
         TextView instruction1 = (TextView) findViewById(R.id.txtInstruction1);
         instruction.setText("1. Cel gry:\n\n" +
-                "Celem gry jest uzyskanie jak największej ilości punktów. Gracz " +
-                "otrzymuje punkty za wyrzucenie odpowiednich oczek na kościach do gry. " +
-                "W każdej rundzie gram może oddać maksymalnie trzy rzuty. Pierwszy rzut " +
-                "zawsze wykonywany jest wszystkimi kośćmi, a następnie gracz rzuca wytypowanymi " +
-                "przez siebie kośćmi.\n\n" +
+                "Celem gry jest uzyskanie jak największej ilości punktów. " +
+                "Gracz w swojej kolejce może wykonać trzy rzuty. Gracz stara się " +
+                "uzyskać jedną z kombinacji punktowanych. Podczas drugiego i " +
+                "trzeciego rzutu gracz może część kości odłożyć i rzucać pozostałymi." +
+                "Maksymalnie po trzecim rzucie wynik musi być zapisany do jednej z " +
+                "wybranych kategorii w tabelce poniżej kości klikając jej etykietę. " +
+                "Na początku wynik można wpisać do wielu kategorii. Pod koniec partii " +
+                "może okazać się, że wyniku nie można wpisać do żadnej z wolnych " +
+                "kategorii.  W takiej sytuacji gracz musi zdecydować, z której kategorii " +
+                "zrezygnuje i tam wpisać wynik zerowy. Wpisów (również zerowych) nie można " +
+                "zmieniać do końca partii. Zakończenie partii następuje po wypełnieniu całej tabelki." +
+                " \n\n" +
                 "2. Rzuty kośćmi i ich wybór\n\n" +
                 "Rzutu koścmi dokonuje się poprzez potrząśnięcie telefonem. Aby zablokować kości, " +
                 "które będą niezmienne podczas kolejnych rzutów, gracz musi przesunąć suwak pod kością. " +
