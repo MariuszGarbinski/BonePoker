@@ -20,7 +20,9 @@ public class InstructionActivity extends AppCompatActivity {
                 "przez siebie kośćmi.\n\n" +
                 "2. Rzuty kośćmi i ich wybór\n\n" +
                 "Rzutu koścmi dokonuje się poprzez potrząśnięcie telefonem. Aby zablokować kości, " +
-                "które będą niezmienne podczas kolejnych rzutów, gra musi przesunąć suwak pod kością. " +
-                " Przesuwając ponownie suwak gracz może oblokować kość, która ponownie będzie rzucana.");
+                "które będą niezmienne podczas kolejnych rzutów, gracz musi przesunąć suwak pod kością. " +
+                " Przesuwając ponownie suwak gracz może oblokować kość, która ponownie będzie rzucana.\n\n" +
+                "3. Punktacja\n" +
+                "");
     }
 }

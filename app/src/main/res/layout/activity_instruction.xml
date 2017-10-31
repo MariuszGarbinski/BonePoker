@@ -1,27 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginTop="5dp"
-    android:orientation="vertical">
+    android:background="@color/colorPrimaryDark">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:orientation="horizontal"
-        android:textAlignment="center"
-        tools:ignore="UselessParent">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txtInstruction"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-    </LinearLayout>
-</LinearLayout>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtInstruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1"
+                android:layout_margin="1dp"
+                android:layout_marginHorizontal="@android:color/white"
+                android:layout_marginVertical="@android:color/white"
+                android:background="@android:color/holo_green_dark">
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/onces"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/onces_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/twoes"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/twoes_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/threes"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/threes_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/fours"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/fours_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/fives"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/fives_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/sixes"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/sixes_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/pair"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/pair_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/twoPairs"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/twoPairs_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/threeOfKind"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/threeOfKind_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/litleStraight"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/litleStraight_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/bigStraight"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/bigStraight_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/fullOfHouse"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/fullOfHouse_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/fourOfKind"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/fourOfKind_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/yahtzee"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/yahtzee_txt" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dp"
+                        android:text="@string/chance"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:text="@string/chance_txt" />
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

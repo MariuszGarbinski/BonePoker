@@ -1,4 +1,34 @@
 <resources>
     <string name="app_name">Bone Poker</string>
     <string name="title_activity_start">StartActivity</string>
+    <string name="onces">Jedynki</string>
+    <string name="onces_txt">Suma jedynek</string>
+    <string name="twoes">Dwójki</string>
+    <string name="twoes_txt">Suma dwójek</string>
+    <string name="threes">Trójki</string>
+    <string name="threes_txt">Suma trójek</string>
+    <string name="fours">Czwórki</string>
+    <string name="fours_txt">Suma czwórek</string>
+    <string name="fives">Piątki</string>
+    <string name="fives_txt">Suma piątek</string>
+    <string name="sixes">Szóstki</string>
+    <string name="sixes_txt">Suma szóstek</string>
+    <string name="pair">Para</string>
+    <string name="pair_txt">Suma oczek tworzących parę</string>
+    <string name="twoPairs">Dwie pary</string>
+    <string name="twoPairs_txt">Suma oczek tworzących dwie pary</string>
+    <string name="threeOfKind">Trójka</string>
+    <string name="threeOfKind_txt">Suma oczek tworzących trójkę</string>
+    <string name="litleStraight">Mały strit</string>
+    <string name="litleStraight_txt">15 punktów</string>
+    <string name="bigStraight">Duży strit</string>
+    <string name="bigStraight_txt">20 punktów</string>
+    <string name="fullOfHouse">Full</string>
+    <string name="fullOfHouse_txt">Suma oczek + 10 pkt</string>
+    <string name="fourOfKind">Kareta</string>
+    <string name="fourOfKind_txt">Suma oczek + 20 pkt</string>
+    <string name="yahtzee">Poker</string>
+    <string name="yahtzee_txt">Suma oczek + 50 pkt</string>
+    <string name="chance">Szansa</string>
+    <string name="chance_txt">Suma wszystkich oczek</string>
 </resources>
