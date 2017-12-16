@@ -29,11 +29,20 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Result.KEY_DATE + " DATETIME )";
 
         db.execSQL(CREATE_TABLE_RESULT);
+
+        CREATE_TABLE_RESULT = "CREATE TABLE " + Summary.TABLE + "("
+                + Summary.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + Summary.KEY_SUM + " INTEGER, "
+                + Summary.KEY_DATE + " DATETIME )";
+
+        db.execSQL(CREATE_TABLE_RESULT);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + Result.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Summary.TABLE);
         onCreate(db);
     }
 

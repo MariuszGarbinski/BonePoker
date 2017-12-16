@@ -18,7 +18,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         try {
             ArrayList<String> zxczxc = new ArrayList<>();
-            ListView listView = (ListView)findViewById(R.id.lvHistory);
+            ListView listView = findViewById(R.id.lvHistory);
             ResultDBManager dbMan = new ResultDBManager(getApplicationContext());
             List<Result> histRes = null;
             histRes = dbMan.getHistoryResults();

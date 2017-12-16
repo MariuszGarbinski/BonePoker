@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static final int SHAKE_THRESHOLD = 600;
     private Toast infoToast;
     private Result diceRolls;
+    private Summary summary;
     int[] tab = new int[5];
     private boolean bOnes = true;
     private boolean bTwos = true;
@@ -86,11 +87,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private boolean checkSwitches()
     {
         boolean retVal = false;
-        Switch switch1 = (Switch)findViewById(R.id.switch_1);
-        Switch switch2 = (Switch)findViewById(R.id.switch_2);
-        Switch switch3 = (Switch)findViewById(R.id.switch_3);
-        Switch switch4 = (Switch)findViewById(R.id.switch_4);
-        Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        Switch switch1 = findViewById(R.id.switch_1);
+        Switch switch2 = findViewById(R.id.switch_2);
+        Switch switch3 = findViewById(R.id.switch_3);
+        Switch switch4 = findViewById(R.id.switch_4);
+        Switch switch5 = findViewById(R.id.switch_5);
 
         if (switch1.isChecked() &&
                 switch2.isChecked() &&
@@ -118,46 +119,50 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             diceRolls = new Result();
         }
 
-        final Switch switch1 = (Switch)findViewById(R.id.switch_1);
-        final Switch switch2 = (Switch)findViewById(R.id.switch_2);
-        final Switch switch3 = (Switch)findViewById(R.id.switch_3);
-        final Switch switch4 = (Switch)findViewById(R.id.switch_4);
-        final Switch switch5 = (Switch)findViewById(R.id.switch_5);
-        final Button btnSave = (Button)findViewById(R.id.btnSave);
-        final Button btnNewGame = (Button)findViewById(R.id.btnNewGame);
-        final TextView textRounds = (TextView)findViewById(R.id.textRounds);
-        final TextView textThrows = (TextView)findViewById(R.id.textThrows);
-        final TextView lblOnes = (TextView)findViewById(R.id.textView1);
-        final TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
-        final TextView lblTwos = (TextView)findViewById(R.id.textView2);
-        final TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
-        final TextView lblThrees = (TextView)findViewById(R.id.textView3);
-        final TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
-        final TextView lblFours = (TextView)findViewById(R.id.textView4);
-        final TextView txtFours = (TextView)findViewById(R.id.textView4_1);
-        final TextView lblFivess = (TextView)findViewById(R.id.textView5);
-        final TextView txtFivess = (TextView)findViewById(R.id.textView5_1);
-        final TextView lblSixs = (TextView)findViewById(R.id.textView6);
-        final TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
-        final TextView lblPair = (TextView)findViewById(R.id.textView7);
-        final TextView txtPair = (TextView)findViewById(R.id.textView7_1);
-        final TextView lblTwoPairs = (TextView)findViewById(R.id.textView8);
-        final TextView txtTwoPairs = (TextView)findViewById(R.id.textView8_1);
-        final TextView lblThreeOfKind = (TextView)findViewById(R.id.textView9);
-        final TextView txtThreeOfKind = (TextView)findViewById(R.id.textView9_1);
-        final TextView lblLitleStraight = (TextView)findViewById(R.id.textView10);
-        final TextView txtLitleStraight = (TextView)findViewById(R.id.textView10_1);
-        final TextView lblBigStraight = (TextView)findViewById(R.id.textView11);
-        final TextView txtBigStraight = (TextView)findViewById(R.id.textView11_1);
-        final TextView lblFullHouse = (TextView)findViewById(R.id.textView12);
-        final TextView txtFullHouse = (TextView)findViewById(R.id.textView12_1);
-        final TextView lblFoureOfKind = (TextView)findViewById(R.id.textView13);
-        final TextView txtFoureOfKind = (TextView)findViewById(R.id.textView13_1);
-        final TextView lblYathzee = (TextView)findViewById(R.id.textView14);
-        final TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
-        final TextView lblChance = (TextView)findViewById(R.id.textView15);
-        final TextView txtChance = (TextView)findViewById(R.id.textView15_1);
-        final TextView txtTotal = (TextView)findViewById(R.id.textView16_1);
+        if(summary == null){
+            summary = new Summary();
+        }
+
+        final Switch switch1 = findViewById(R.id.switch_1);
+        final Switch switch2 = findViewById(R.id.switch_2);
+        final Switch switch3 = findViewById(R.id.switch_3);
+        final Switch switch4 = findViewById(R.id.switch_4);
+        final Switch switch5 = findViewById(R.id.switch_5);
+        final Button btnSave = findViewById(R.id.btnSave);
+        final Button btnNewGame = findViewById(R.id.btnNewGame);
+        final TextView textRounds = findViewById(R.id.textRounds);
+        final TextView textThrows = findViewById(R.id.textThrows);
+        final TextView lblOnes = findViewById(R.id.textView1);
+        final TextView txtOnes = findViewById(R.id.textView1_1);
+        final TextView lblTwos = findViewById(R.id.textView2);
+        final TextView txtTwos = findViewById(R.id.textView2_1);
+        final TextView lblThrees = findViewById(R.id.textView3);
+        final TextView txtThrees = findViewById(R.id.textView3_1);
+        final TextView lblFours = findViewById(R.id.textView4);
+        final TextView txtFours = findViewById(R.id.textView4_1);
+        final TextView lblFivess = findViewById(R.id.textView5);
+        final TextView txtFivess = findViewById(R.id.textView5_1);
+        final TextView lblSixs = findViewById(R.id.textView6);
+        final TextView txtSixs = findViewById(R.id.textView6_1);
+        final TextView lblPair = findViewById(R.id.textView7);
+        final TextView txtPair = findViewById(R.id.textView7_1);
+        final TextView lblTwoPairs = findViewById(R.id.textView8);
+        final TextView txtTwoPairs = findViewById(R.id.textView8_1);
+        final TextView lblThreeOfKind = findViewById(R.id.textView9);
+        final TextView txtThreeOfKind = findViewById(R.id.textView9_1);
+        final TextView lblLitleStraight = findViewById(R.id.textView10);
+        final TextView txtLitleStraight = findViewById(R.id.textView10_1);
+        final TextView lblBigStraight = findViewById(R.id.textView11);
+        final TextView txtBigStraight = findViewById(R.id.textView11_1);
+        final TextView lblFullHouse = findViewById(R.id.textView12);
+        final TextView txtFullHouse = findViewById(R.id.textView12_1);
+        final TextView lblFoureOfKind = findViewById(R.id.textView13);
+        final TextView txtFoureOfKind = findViewById(R.id.textView13_1);
+        final TextView lblYathzee = findViewById(R.id.textView14);
+        final TextView txtYathzee = findViewById(R.id.textView14_1);
+        final TextView lblChance = findViewById(R.id.textView15);
+        final TextView txtChance = findViewById(R.id.textView15_1);
+        final TextView txtTotal = findViewById(R.id.textView16_1);
 
 
         textThrows.setText(String.valueOf(shoots));
@@ -541,6 +546,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onClick(View view){
 
+
+                summary.Tmstmp = new Date();
+                SummaryDBManager sDbMan = new SummaryDBManager(getApplicationContext());
+                if(sDbMan.insert(summary) > 0)
+                {
+                    ResetControls();
+                }else{
+                    showToast("Błąd zapisu do bazy danych.");
+                }
+/*
                 diceRolls.Tmstmp = new Date();
                 ResultDBManager dbMan = new ResultDBManager(getApplicationContext());
                 if(dbMan.insert(diceRolls) > 0)
@@ -549,6 +564,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }else{
                     showToast("Błąd zapisu do bazy danych.");
                 }
+*/
             }
         });
 
@@ -603,32 +619,32 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         square4.setBackgroundResource(R.drawable.square);
         square5.setBackgroundResource(R.drawable.square);
 
-        TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
-        TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
-        TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
-        TextView txtFours = (TextView)findViewById(R.id.textView4_1);
-        TextView txtFives = (TextView)findViewById(R.id.textView5_1);
-        TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
-        TextView txtPair = (TextView)findViewById(R.id.textView7_1);
-        TextView txtTwoPairs = (TextView)findViewById(R.id.textView8_1);
-        TextView txtThreeOfKind = (TextView)findViewById(R.id.textView9_1);
-        TextView txtLittleStraight = (TextView)findViewById(R.id.textView10_1);
-        TextView txtBigStraight = (TextView)findViewById(R.id.textView11_1);
-        TextView txtFull = (TextView)findViewById(R.id.textView12_1);
-        TextView txtFourOfKind = (TextView)findViewById(R.id.textView13_1);
-        TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
-        TextView txtChance = (TextView)findViewById(R.id.textView15_1);
-        Button btnSave = (Button)findViewById(R.id.btnSave);
+        TextView txtOnes = findViewById(R.id.textView1_1);
+        TextView txtTwos = findViewById(R.id.textView2_1);
+        TextView txtThrees = findViewById(R.id.textView3_1);
+        TextView txtFours = findViewById(R.id.textView4_1);
+        TextView txtFives = findViewById(R.id.textView5_1);
+        TextView txtSixs = findViewById(R.id.textView6_1);
+        TextView txtPair = findViewById(R.id.textView7_1);
+        TextView txtTwoPairs = findViewById(R.id.textView8_1);
+        TextView txtThreeOfKind = findViewById(R.id.textView9_1);
+        TextView txtLittleStraight = findViewById(R.id.textView10_1);
+        TextView txtBigStraight = findViewById(R.id.textView11_1);
+        TextView txtFull = findViewById(R.id.textView12_1);
+        TextView txtFourOfKind = findViewById(R.id.textView13_1);
+        TextView txtYathzee = findViewById(R.id.textView14_1);
+        TextView txtChance = findViewById(R.id.textView15_1);
+        Button btnSave = findViewById(R.id.btnSave);
 
         shoots = 3;
         rounds -= 1;
         if (rounds == 0) btnSave.setEnabled(true);
         diceRolls = new Result();
-        Switch switch1 = (Switch)findViewById(R.id.switch_1);
-        Switch switch2 = (Switch)findViewById(R.id.switch_2);
-        Switch switch3 = (Switch)findViewById(R.id.switch_3);
-        Switch switch4 = (Switch)findViewById(R.id.switch_4);
-        Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        Switch switch1 = findViewById(R.id.switch_1);
+        Switch switch2 = findViewById(R.id.switch_2);
+        Switch switch3 = findViewById(R.id.switch_3);
+        Switch switch4 = findViewById(R.id.switch_4);
+        Switch switch5 = findViewById(R.id.switch_5);
         switch1.setChecked(false);
         switch2.setChecked(false);
         switch3.setChecked(false);
@@ -651,10 +667,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (bYathzee != false) txtYathzee.setText("0");
         if (bChance != false) txtChance.setText("0");
 
-        textThrows = (TextView)findViewById(R.id.textThrows);
+        textThrows = findViewById(R.id.textThrows);
         textThrows.setText(String.valueOf(shoots));
 
-        textRounds = (TextView)findViewById(R.id.textRounds);
+        textRounds = findViewById(R.id.textRounds);
         textRounds.setText(String.valueOf(rounds));
     }
 
@@ -671,11 +687,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void getRandomNumber() {
 
-        Switch switch1 = (Switch)findViewById(R.id.switch_1);
-        Switch switch2 = (Switch)findViewById(R.id.switch_2);
-        Switch switch3 = (Switch)findViewById(R.id.switch_3);
-        Switch switch4 = (Switch)findViewById(R.id.switch_4);
-        Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        Switch switch1 = findViewById(R.id.switch_1);
+        Switch switch2 = findViewById(R.id.switch_2);
+        Switch switch3 = findViewById(R.id.switch_3);
+        Switch switch4 = findViewById(R.id.switch_4);
+        Switch switch5 = findViewById(R.id.switch_5);
 
         ArrayList<Integer> numbersGenerated = new ArrayList<>();
 
@@ -688,7 +704,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Animation a = AnimationUtils.loadAnimation(this, R.anim.move_down_ball_first);
 
             if(!switch1.isChecked()){
-                square1 = (FrameLayout) findViewById(R.id.square_1);
+                square1 = findViewById(R.id.square_1);
                 switch (numbersGenerated.get(0)){
                     case 1:
                         square1.setBackgroundResource(R.drawable.bone1);
@@ -716,7 +732,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 tab[0] = numbersGenerated.get(0);
             }
             if(!switch2.isChecked()){
-                square2 = (FrameLayout) findViewById(R.id.square_2);
+                square2 = findViewById(R.id.square_2);
                 switch (numbersGenerated.get(1)){
                     case 1:
                         square2.setBackgroundResource(R.drawable.bone1);
@@ -744,7 +760,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 tab[1] = numbersGenerated.get(1);
             }
             if(!switch3.isChecked()){
-                square3 = (FrameLayout) findViewById(R.id.square_3);
+                square3 = findViewById(R.id.square_3);
                 switch (numbersGenerated.get(2)){
                     case 1:
                         square3.setBackgroundResource(R.drawable.bone1);
@@ -772,7 +788,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 tab[2] = numbersGenerated.get(2);
             }
             if(!switch4.isChecked()){
-                square4 = (FrameLayout) findViewById(R.id.square_4);
+                square4 = findViewById(R.id.square_4);
                 switch (numbersGenerated.get(3)){
                     case 1:
                         square4.setBackgroundResource(R.drawable.bone1);
@@ -800,7 +816,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 tab[3] = numbersGenerated.get(3);
             }
             if(!switch5.isChecked()){
-                square5 = (FrameLayout) findViewById(R.id.square_5);
+                square5 = findViewById(R.id.square_5);
                 switch (numbersGenerated.get(4)){
                     case 1:
                         square5.setBackgroundResource(R.drawable.bone1);
@@ -831,21 +847,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void afterUpdate() {
 
-        TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
-        TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
-        TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
-        TextView txtFours = (TextView)findViewById(R.id.textView4_1);
-        TextView txtFives = (TextView)findViewById(R.id.textView5_1);
-        TextView txtSixs = (TextView)findViewById(R.id.textView6_1);
-        TextView txtPair = (TextView)findViewById(R.id.textView7_1);
-        TextView txtTwoPairs = (TextView)findViewById(R.id.textView8_1);
-        TextView txtThreeOfKind = (TextView)findViewById(R.id.textView9_1);
-        TextView txtLittleStraight = (TextView)findViewById(R.id.textView10_1);
-        TextView txtBigStraight = (TextView)findViewById(R.id.textView11_1);
-        TextView txtFull = (TextView)findViewById(R.id.textView12_1);
-        TextView txtFourOfKind = (TextView)findViewById(R.id.textView13_1);
-        TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
-        TextView txtChance = (TextView)findViewById(R.id.textView15_1);
+        TextView txtOnes = findViewById(R.id.textView1_1);
+        TextView txtTwos = findViewById(R.id.textView2_1);
+        TextView txtThrees = findViewById(R.id.textView3_1);
+        TextView txtFours = findViewById(R.id.textView4_1);
+        TextView txtFives = findViewById(R.id.textView5_1);
+        TextView txtSixs = findViewById(R.id.textView6_1);
+        TextView txtPair = findViewById(R.id.textView7_1);
+        TextView txtTwoPairs = findViewById(R.id.textView8_1);
+        TextView txtThreeOfKind = findViewById(R.id.textView9_1);
+        TextView txtLittleStraight = findViewById(R.id.textView10_1);
+        TextView txtBigStraight = findViewById(R.id.textView11_1);
+        TextView txtFull = findViewById(R.id.textView12_1);
+        TextView txtFourOfKind = findViewById(R.id.textView13_1);
+        TextView txtYathzee = findViewById(R.id.textView14_1);
+        TextView txtChance = findViewById(R.id.textView15_1);
 
         int iOnes = 0;
         int iTwos = 0;
@@ -1088,8 +1104,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent sensorEvent) {
 
         Sensor mySensor = sensorEvent.sensor;
-        textThrows = (TextView) findViewById(R.id.textThrows);
-        Button btnSave = (Button)findViewById(R.id.btnSave);
+        textThrows = findViewById(R.id.textThrows);
+        Button btnSave = findViewById(R.id.btnSave);
 
             if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
                 float x = sensorEvent.values[0];
