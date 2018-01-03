@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
+    //Deklaracja zmiennych
     private TextView textThrows;
     private TextView textRounds;
     private FrameLayout square1;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private int total;
 
 
+    //Funkcja wyświetlania okienka powiadomień
     public void showToast(String message)
     {
         int toastDuration = 700;
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         toastTimer.start();
     }
 
+    //Funkcja sprawdzająca stan suwaków pod kośćmi
     private boolean checkSwitches()
     {
         boolean retVal = false;
@@ -103,12 +106,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         return  retVal;
     }
 
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Włączenie acelerometru i przypisanie ustawień startowych gry
         senSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
@@ -118,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             diceRolls = new Result();
         }
 
+        //przypisanie ... do zmiennych
         final Switch switch1 = (Switch)findViewById(R.id.switch_1);
         final Switch switch2 = (Switch)findViewById(R.id.switch_2);
         final Switch switch3 = (Switch)findViewById(R.id.switch_3);
@@ -159,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final TextView txtChance = (TextView)findViewById(R.id.textView15_1);
         final TextView txtTotal = (TextView)findViewById(R.id.textView16_1);
 
-
+        //wpisanie pozostałej ilości rzutów / rund w etykiety oraz ustawienie stanu przycisku zapisu danych do bazy jako false
         textThrows.setText(String.valueOf(shoots));
         textRounds.setText(String.valueOf(rounds));
         btnSave.setEnabled(false);
@@ -435,7 +441,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        //Przełączniki
+        //nasłuchiwanie stanu przełączników zablokowania kości
+        //przełącznik kość #1
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -455,7 +462,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             }
         });
-
+        //przełącznik kość #2
         switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -475,7 +482,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             }
         });
-
+        //przełącznik kość #3
         switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -495,7 +502,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             }
         });
-
+        //przełącznik kość #4
         switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -515,7 +522,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             }
         });
-
+        //przełącznik kość #5
         switch5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -535,7 +542,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             }
         });
-
+        //nasłuchiwanie stanu przycisku zapisu danych do bazy
         btnSave.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -552,10 +559,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+        //nasłuchiwanie stanu przycisku rozpoczęcia nowej gry
         btnNewGame.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view){
+                //reset i przywrócenie ustawień początkowych gry
                 rounds = 16;
                 btnNewGame.setEnabled(false);
                 bOnes = true;
@@ -594,15 +603,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
     }
-
+    //funkcja resetowania do ustawień początkowych gry
     private void ResetControls()
     {
+        //ustawienie tła kości
         square1.setBackgroundResource(R.drawable.square);
         square2.setBackgroundResource(R.drawable.square);
         square3.setBackgroundResource(R.drawable.square);
         square4.setBackgroundResource(R.drawable.square);
         square5.setBackgroundResource(R.drawable.square);
 
+        //przypisanie zmiennym etykiet z pól zwynikami rzutów
         TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
         TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
         TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
@@ -620,21 +631,26 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TextView txtChance = (TextView)findViewById(R.id.textView15_1);
         Button btnSave = (Button)findViewById(R.id.btnSave);
 
+        //ustawienie ilości rzutów i rund
         shoots = 3;
         rounds -= 1;
+        //stan przycisku zapisu danych do bazy
         if (rounds == 0) btnSave.setEnabled(true);
         diceRolls = new Result();
+        //przypisanie do zmiennych przełączników blokowania kości
         Switch switch1 = (Switch)findViewById(R.id.switch_1);
         Switch switch2 = (Switch)findViewById(R.id.switch_2);
         Switch switch3 = (Switch)findViewById(R.id.switch_3);
         Switch switch4 = (Switch)findViewById(R.id.switch_4);
         Switch switch5 = (Switch)findViewById(R.id.switch_5);
+        //ustawienie przełączników w stan false
         switch1.setChecked(false);
         switch2.setChecked(false);
         switch3.setChecked(false);
         switch4.setChecked(false);
         switch5.setChecked(false);
 
+        //sprawdzenie stanu utykiet wyników. Jeśli wynik jest różny od false ustawia tekst w wybranej etykiecie na 0
         if (bOnes != false) txtOnes.setText("0");
         if (bTwos != false) txtTwos.setText("0");
         if (bThrees != false) txtThrees.setText("0");
@@ -651,32 +667,39 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (bYathzee != false) txtYathzee.setText("0");
         if (bChance != false) txtChance.setText("0");
 
+        //przypisanie etykiety ilości rzutów do zmiennej i ustawienie ilości pozostałych rzutów
         textThrows = (TextView)findViewById(R.id.textThrows);
         textThrows.setText(String.valueOf(shoots));
 
+        //przypisanie etykiety ilości rund do zmiennej i ustawienie ilości pozostały rund
         textRounds = (TextView)findViewById(R.id.textRounds);
         textRounds.setText(String.valueOf(rounds));
     }
 
+    //fukcja pause
     protected void onPause() {
         super.onPause();
         senSensorManager.unregisterListener(this);
     }
 
+    //funkcja onResume
     protected void onResume() {
         super.onResume();
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    //funkcja losująca ilość oczek na kościach korzystjąca z fukcji random
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void getRandomNumber() {
 
+        //przypisanie do zmiennych przełączników blokowania kości
         Switch switch1 = (Switch)findViewById(R.id.switch_1);
         Switch switch2 = (Switch)findViewById(R.id.switch_2);
         Switch switch3 = (Switch)findViewById(R.id.switch_3);
         Switch switch4 = (Switch)findViewById(R.id.switch_4);
         Switch switch5 = (Switch)findViewById(R.id.switch_5);
 
+        //zarezerwowanie pomięci na listę z liczbami oczek
         ArrayList<Integer> numbersGenerated = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
@@ -685,8 +708,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 numbersGenerated.add(iNumber);
             }
+            //inicjalizacja zmiannej animacji kości
             Animation a = AnimationUtils.loadAnimation(this, R.anim.move_down_ball_first);
 
+            //sprawdzenie stanu przełącznika pod każdą kością i ustawienie odpowiedniego tła zgodnie z wylosowaną liczbą oczek
             if(!switch1.isChecked()){
                 square1 = (FrameLayout) findViewById(R.id.square_1);
                 switch (numbersGenerated.get(0)){
@@ -829,8 +854,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
     }
 
+    //funkcja po aktualizacji
     private void afterUpdate() {
 
+        //przypisanie etykiet do zmiennych
         TextView txtOnes = (TextView)findViewById(R.id.textView1_1);
         TextView txtTwos = (TextView)findViewById(R.id.textView2_1);
         TextView txtThrees = (TextView)findViewById(R.id.textView3_1);
@@ -847,6 +874,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TextView txtYathzee = (TextView)findViewById(R.id.textView14_1);
         TextView txtChance = (TextView)findViewById(R.id.textView15_1);
 
+        //przypisanie 0 dla zmiennych kości
         int iOnes = 0;
         int iTwos = 0;
         int iThrees = 0;
@@ -863,6 +891,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         int iBigStraight = 0;
         int iYathzee = 0;
 
+        //zapisanie w tablicy ilości wylosowanych kości dla poszczególnych liczby oczek
         for(int i = 0; i < tab.length; i++){
             if(tab[i] == 1) iOnes++;
             if(tab[i] == 2) iTwos++;
@@ -872,6 +901,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if(tab[i] == 6) iSixes++;
         }
 
+        //obliczenie możliwych wyników bazujących na tablicy z ilościamy wylosowanych kości
         switch (iOnes){
             case 2:
                 iPair = (iOnes * 1);
@@ -1066,6 +1096,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             iBigStraight = 20;
         }
 
+        //przypisanie wyników do etykiet które nie zostały jeszcze wybrane i zablokowane
         if (bOnes != false) txtOnes.setText(String.valueOf(iOnes * 1));
         if (bTwos != false) txtTwos.setText(String.valueOf(iTwos * 2));
         if (bThrees != false) txtThrees.setText(String.valueOf(iThrees * 3));
@@ -1083,6 +1114,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (bChance != false) txtChance.setText(String.valueOf((iOnes * 1) + (iTwos * 2) + (iThrees * 3) + (iFours * 4) + (iFives * 5) + (iSixes *6)));
     }
 
+    //funkcja sprawdzająca zmiany położenia telefonu i wygenerowania nowej liczby oczek dla każdej kości
     @SuppressLint("NewApi")
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
