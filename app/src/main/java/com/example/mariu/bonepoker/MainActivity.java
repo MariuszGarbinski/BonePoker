@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private int total;
 
+    //obsługa przełączników
     private void switchManager(Switch sw, int dice, int number)
     {
         if(sw.isChecked()){
