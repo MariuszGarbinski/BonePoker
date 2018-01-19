@@ -63,6 +63,39 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private int total;
 
+    private void switchManager(Switch sw, int dice, int number)
+    {
+        if(sw.isChecked()){
+            if(dice == 0)
+            {
+                sw.setChecked(false);
+            }
+            else
+            {
+                showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość "+number);
+            }
+
+        }else{
+            showToast("Odblokowano kość "+number);
+        }
+    }
+
+    ///Zlicza sume dla danego pola, dodaje ją do wyniku i zeruje kości
+    private void doSum(TextView txt, boolean button)
+    {
+        TextView txtTotal = findViewById(R.id.textView16_1);
+        int num1 = Integer.parseInt(txt.getText().toString());
+        int sum = Integer.parseInt(txtTotal.getText().toString());
+        total = sum + num1;
+        txtTotal.setText(String.valueOf(total));
+        button = false;
+        if (num1 != 0){
+            txt.setTextColor(Color.rgb(0,204,0));
+        }else{
+            txt.setTextColor(Color.rgb(255,0,0));
+        }
+        ResetControls();
+    }
 
     public void showToast(String message)
     {
@@ -174,17 +207,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num1 = Integer.parseInt(txtOnes.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num1;
-                txtTotal.setText(String.valueOf(total));
-                bOnes = false;
-                if (num1 != 0){
-                    txtOnes.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtOnes.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtOnes, bOnes);
             }
         });
 
@@ -192,17 +215,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num2 = Integer.parseInt(txtTwos.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num2;
-                txtTotal.setText(String.valueOf(total));
-                bTwos = false;
-                if (num2 != 0){
-                    txtTwos.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtTwos.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtTwos, bTwos);
             }
         });
 
@@ -210,17 +223,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num3 = Integer.parseInt(txtThrees.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num3;
-                txtTotal.setText(String.valueOf(total));
-                bThrees = false;
-                if (num3 != 0){
-                    txtThrees.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtThrees.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtThrees, bThrees);
             }
         });
 
@@ -228,17 +231,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num4 = Integer.parseInt(txtFours.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num4;
-                txtTotal.setText(String.valueOf(total));
-                bFours = false;
-                if (num4 != 0){
-                    txtFours.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtFours.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtFours, bFours);
             }
         });
 
@@ -246,17 +239,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num5 = Integer.parseInt(txtFivess.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num5;
-                txtTotal.setText(String.valueOf(total));
-                bFives = false;
-                if (num5 != 0){
-                    txtFivess.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtFivess.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtFivess, bFives);
             }
         });
 
@@ -264,17 +247,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num6 = Integer.parseInt(txtSixs.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num6;
-                txtTotal.setText(String.valueOf(total));
-                bSixs = false;
-                if (num6 != 0){
-                    txtSixs.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtSixs.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtSixs, bSixs);
             }
         });
 
@@ -282,17 +255,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num7 = Integer.parseInt(txtPair.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num7;
-                txtTotal.setText(String.valueOf(total));
-                bPair = false;
-                if (num7 != 0){
-                    txtPair.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtPair.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtPair, bPair);
             }
         });
 
@@ -300,17 +263,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num8 = Integer.parseInt(txtTwoPairs.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num8;
-                txtTotal.setText(String.valueOf(total));
-                bTwoPairs = false;
-                if (num8 != 0){
-                    txtTwoPairs.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtTwoPairs.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtTwoPairs, bTwoPairs);
             }
         });
 
@@ -318,17 +271,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num9 = Integer.parseInt(txtThreeOfKind.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num9;
-                txtTotal.setText(String.valueOf(total));
-                bThreeOfKind = false;
-                if (num9 != 0){
-                    txtThreeOfKind.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtThreeOfKind.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtThreeOfKind, bThreeOfKind);
             }
         });
 
@@ -336,17 +279,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num10 = Integer.parseInt(txtLitleStraight.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num10;
-                txtTotal.setText(String.valueOf(total));
-                bLitleStraight = false;
-                if (num10 != 0){
-                    txtLitleStraight.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtLitleStraight.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtLitleStraight, bLitleStraight);
             }
         });
 
@@ -354,17 +287,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num11 = Integer.parseInt(txtBigStraight.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num11;
-                txtTotal.setText(String.valueOf(total));
-                bBigStraight = false;
-                if (num11 != 0){
-                    txtBigStraight.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtBigStraight.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtBigStraight, bBigStraight);
             }
         });
 
@@ -372,17 +295,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num12 = Integer.parseInt(txtFullHouse.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num12;
-                txtTotal.setText(String.valueOf(total));
-                bFullHouse = false;
-                if (num12 != 0){
-                    txtFullHouse.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtFullHouse.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtFullHouse, bFullHouse);
             }
         });
 
@@ -390,17 +303,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num13 = Integer.parseInt(txtFoureOfKind.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num13;
-                txtTotal.setText(String.valueOf(total));
-                bFourOfKind = false;
-                if (num13 != 0){
-                    txtFoureOfKind.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtFoureOfKind.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtFoureOfKind, bFourOfKind);
             }
         });
 
@@ -408,17 +311,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num14 = Integer.parseInt(txtYathzee.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num14;
-                txtTotal.setText(String.valueOf(total));
-                bYathzee = false;
-                if (num14 != 0){
-                    txtYathzee.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtYathzee.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtYathzee, bYathzee);
             }
         });
 
@@ -426,17 +319,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                int num15 = Integer.parseInt(txtChance.getText().toString());
-                int sum = Integer.parseInt(txtTotal.getText().toString());
-                total = sum + num15;
-                txtTotal.setText(String.valueOf(total));
-                bChance = false;
-                if (num15 != 0){
-                    txtChance.setTextColor(Color.rgb(0,204,0));
-                }else{
-                    txtChance.setTextColor(Color.rgb(255,0,0));
-                }
-                ResetControls();
+                doSum(txtChance, bChance);
             }
         });
 
@@ -445,19 +328,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch1.isChecked()){
-                    if(diceRolls.dice1 == 0)
-                    {
-                        switch1.setChecked(false);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 1");
-                    }
-
-                }else{
-                    showToast("Odblokowano kość 1");
-                }
+                switchManager(switch1, diceRolls.dice1, 1);
             }
         });
 
@@ -465,19 +336,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch2.isChecked()){
-                    if(diceRolls.dice2 == 0)
-                    {
-                        switch2.setChecked(false);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 2");
-                    }
-
-                }else{
-                    showToast("Odblokowano kość 2");
-                }
+                switchManager(switch2, diceRolls.dice2, 2);
             }
         });
 
@@ -485,19 +344,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch3.isChecked()){
-                    if(diceRolls.dice3 == 0)
-                    {
-                        switch3.setChecked(false);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 3");
-                    }
-
-                }else{
-                    showToast("Odblokowano kość 3");
-                }
+                switchManager(switch3, diceRolls.dice3, 3);
             }
         });
 
@@ -505,19 +352,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch4.isChecked()){
-                    if(diceRolls.dice4 == 0)
-                    {
-                        switch4.setChecked(false);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 4");
-                    }
-
-                }else{
-                    showToast("Odblokowano kość 4");
-                }
+                switchManager(switch4, diceRolls.dice4, 4);
             }
         });
 
@@ -525,19 +360,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(switch5.isChecked()){
-                    if(diceRolls.dice5 == 0)
-                    {
-                        switch5.setChecked(false);
-                    }
-                    else
-                    {
-                        showToast(checkSwitches() ? "Zablokowano wszystkie." : "Zablokowano kość 5");
-                    }
-
-                }else{
-                    showToast("Odblokowano kość 5");
-                }
+                switchManager(switch5, diceRolls.dice5, 5);
             }
         });
 
@@ -548,6 +371,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
                 summary.Tmstmp = new Date();
+                summary.sum = total;
                 SummaryDBManager sDbMan = new SummaryDBManager(getApplicationContext());
                 if(sDbMan.insert(summary) > 0)
                 {
@@ -555,16 +379,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }else{
                     showToast("Błąd zapisu do bazy danych.");
                 }
-/*
-                diceRolls.Tmstmp = new Date();
-                ResultDBManager dbMan = new ResultDBManager(getApplicationContext());
-                if(dbMan.insert(diceRolls) > 0)
-                {
-                    ResetControls();
-                }else{
-                    showToast("Błąd zapisu do bazy danych.");
-                }
-*/
             }
         });
 
@@ -684,6 +498,32 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    private void setDiceImage(int number, FrameLayout a)
+    {
+        switch (number){
+            case 1:
+                a.setBackgroundResource(R.drawable.bone1);
+                break;
+            case 2:
+                a.setBackgroundResource(R.drawable.bone2);
+                break;
+            case 3:
+                a.setBackgroundResource(R.drawable.bone3);
+                break;
+            case 4:
+                a.setBackgroundResource(R.drawable.bone4);
+                break;
+            case 5:
+                a.setBackgroundResource(R.drawable.bone5);
+                break;
+            case 6:
+                a.setBackgroundResource(R.drawable.bone6);
+                break;
+        }
+        a.setVisibility(View.VISIBLE);
+        a.clearAnimation();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void getRandomNumber() {
 
@@ -705,140 +545,35 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             if(!switch1.isChecked()){
                 square1 = findViewById(R.id.square_1);
-                switch (numbersGenerated.get(0)){
-                    case 1:
-                        square1.setBackgroundResource(R.drawable.bone1);
-                        break;
-                    case 2:
-                        square1.setBackgroundResource(R.drawable.bone2);
-                        break;
-                    case 3:
-                        square1.setBackgroundResource(R.drawable.bone3);
-                        break;
-                    case 4:
-                        square1.setBackgroundResource(R.drawable.bone4);
-                        break;
-                    case 5:
-                        square1.setBackgroundResource(R.drawable.bone5);
-                        break;
-                    case 6:
-                        square1.setBackgroundResource(R.drawable.bone6);
-                        break;
-                }
-                square1.setVisibility(View.VISIBLE);
-                square1.clearAnimation();
+                setDiceImage(numbersGenerated.get(0), square1);
                 square1.startAnimation(a);
                 diceRolls.dice1 = numbersGenerated.get(0);
                 tab[0] = numbersGenerated.get(0);
             }
             if(!switch2.isChecked()){
                 square2 = findViewById(R.id.square_2);
-                switch (numbersGenerated.get(1)){
-                    case 1:
-                        square2.setBackgroundResource(R.drawable.bone1);
-                        break;
-                    case 2:
-                        square2.setBackgroundResource(R.drawable.bone2);
-                        break;
-                    case 3:
-                        square2.setBackgroundResource(R.drawable.bone3);
-                        break;
-                    case 4:
-                        square2.setBackgroundResource(R.drawable.bone4);
-                        break;
-                    case 5:
-                        square2.setBackgroundResource(R.drawable.bone5);
-                        break;
-                    case 6:
-                        square2.setBackgroundResource(R.drawable.bone6);
-                        break;
-                }
-                square2.setVisibility(View.VISIBLE);
-                square2.clearAnimation();
+                setDiceImage(numbersGenerated.get(1), square2);
                 square2.startAnimation(a);
                 diceRolls.dice2 = numbersGenerated.get(1);
                 tab[1] = numbersGenerated.get(1);
             }
             if(!switch3.isChecked()){
                 square3 = findViewById(R.id.square_3);
-                switch (numbersGenerated.get(2)){
-                    case 1:
-                        square3.setBackgroundResource(R.drawable.bone1);
-                        break;
-                    case 2:
-                        square3.setBackgroundResource(R.drawable.bone2);
-                        break;
-                    case 3:
-                        square3.setBackgroundResource(R.drawable.bone3);
-                        break;
-                    case 4:
-                        square3.setBackgroundResource(R.drawable.bone4);
-                        break;
-                    case 5:
-                        square3.setBackgroundResource(R.drawable.bone5);
-                        break;
-                    case 6:
-                        square3.setBackgroundResource(R.drawable.bone6);
-                        break;
-                }
-                square3.setVisibility(View.VISIBLE);
-                square3.clearAnimation();
+                setDiceImage(numbersGenerated.get(2), square3);
                 square3.startAnimation(a);
                 diceRolls.dice3 = numbersGenerated.get(2);
                 tab[2] = numbersGenerated.get(2);
             }
             if(!switch4.isChecked()){
                 square4 = findViewById(R.id.square_4);
-                switch (numbersGenerated.get(3)){
-                    case 1:
-                        square4.setBackgroundResource(R.drawable.bone1);
-                        break;
-                    case 2:
-                        square4.setBackgroundResource(R.drawable.bone2);
-                        break;
-                    case 3:
-                        square4.setBackgroundResource(R.drawable.bone3);
-                        break;
-                    case 4:
-                        square4.setBackgroundResource(R.drawable.bone4);
-                        break;
-                    case 5:
-                        square4.setBackgroundResource(R.drawable.bone5);
-                        break;
-                    case 6:
-                        square4.setBackgroundResource(R.drawable.bone6);
-                        break;
-                }
-                square4.setVisibility(View.VISIBLE);
-                square4.clearAnimation();
+                setDiceImage(numbersGenerated.get(3), square4);
                 square4.startAnimation(a);
                 diceRolls.dice4 = numbersGenerated.get(3);
                 tab[3] = numbersGenerated.get(3);
             }
             if(!switch5.isChecked()){
                 square5 = findViewById(R.id.square_5);
-                switch (numbersGenerated.get(4)){
-                    case 1:
-                        square5.setBackgroundResource(R.drawable.bone1);
-                        break;
-                    case 2:
-                        square5.setBackgroundResource(R.drawable.bone2);
-                        break;
-                    case 3:
-                        square5.setBackgroundResource(R.drawable.bone3);
-                        break;
-                    case 4:
-                        square5.setBackgroundResource(R.drawable.bone4);
-                        break;
-                    case 5:
-                        square5.setBackgroundResource(R.drawable.bone5);
-                        break;
-                    case 6:
-                        square5.setBackgroundResource(R.drawable.bone6);
-                        break;
-                }
-                square5.setVisibility(View.VISIBLE);
-                square5.clearAnimation();
+                setDiceImage(numbersGenerated.get(4), square5);
                 square5.startAnimation(a);
                 diceRolls.dice5 = numbersGenerated.get(4);
                 tab[4] = numbersGenerated.get(4);

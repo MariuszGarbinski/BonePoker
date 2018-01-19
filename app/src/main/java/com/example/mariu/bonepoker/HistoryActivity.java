@@ -19,10 +19,10 @@ public class HistoryActivity extends AppCompatActivity {
         try {
             ArrayList<String> zxczxc = new ArrayList<>();
             ListView listView = findViewById(R.id.lvHistory);
-            ResultDBManager dbMan = new ResultDBManager(getApplicationContext());
-            List<Result> histRes = null;
-            histRes = dbMan.getHistoryResults();
-            for (Result element : histRes) {
+            SummaryDBManager dbSMan = new SummaryDBManager(getApplicationContext());
+            List<Summary> histSum = null;
+            histSum = dbSMan.getHistorySum();
+            for (Summary element : histSum) {
                 zxczxc.add(element.toString());
             }
 
