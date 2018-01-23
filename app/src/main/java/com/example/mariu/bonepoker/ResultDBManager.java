@@ -79,5 +79,4 @@ public class ResultDBManager {
         db.close();
         return retList;
     }
-
 }

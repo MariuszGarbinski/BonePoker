@@ -1,7 +1,6 @@
 package com.example.mariu.bonepoker;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.SensorManager;
 import android.os.Build;
@@ -212,8 +211,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtOnes);
                 bOnes = false;
+                doSum(txtOnes);
             }
         });
 
@@ -221,8 +220,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtTwos);
                 bTwos = false;
+                doSum(txtTwos);
             }
         });
 
@@ -230,8 +229,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtThrees);
                 bThrees = false;
+                doSum(txtThrees);
             }
         });
 
@@ -239,8 +238,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtFours);
                 bFours = false;
+                doSum(txtFours);
             }
         });
 
@@ -248,8 +247,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtFivess);
                 bFives = false;
+                doSum(txtFivess);
             }
         });
 
@@ -257,8 +256,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtSixs);
                 bSixs = false;
+                doSum(txtSixs);
             }
         });
 
@@ -266,8 +265,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtPair);
                 bPair = false;
+                doSum(txtPair);
             }
         });
 
@@ -275,8 +274,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtTwoPairs);
                 bTwoPairs = false;
+                doSum(txtTwoPairs);
             }
         });
 
@@ -284,8 +283,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtThreeOfKind);
                 bThreeOfKind = false;
+                doSum(txtThreeOfKind);
             }
         });
 
@@ -293,8 +292,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtLitleStraight);
                 bLitleStraight = false;
+                doSum(txtLitleStraight);
             }
         });
 
@@ -302,8 +301,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtBigStraight);
                 bBigStraight = false;
+                doSum(txtBigStraight);
             }
         });
 
@@ -311,8 +310,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtFullHouse);
                 bFullHouse = false;
+                doSum(txtFullHouse);
             }
         });
 
@@ -320,8 +319,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtFoureOfKind);
                 bFourOfKind = false;
+                doSum(txtFoureOfKind);
             }
         });
 
@@ -329,8 +328,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtYathzee);
                 bYathzee = false;
+                doSum(txtYathzee);
             }
         });
 
@@ -338,8 +337,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onClick(View view) {
-                doSum(txtChance);
                 bChance = false;
+                doSum(txtChance);
             }
         });
 
@@ -532,6 +531,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    //Obługa obrazka kości
     private void setDiceImage(int number, FrameLayout a)
     {
         switch (number){

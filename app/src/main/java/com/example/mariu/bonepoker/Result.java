@@ -39,5 +39,4 @@ public class Result {
                 }
                 return dateStr+": "+ dice1+" "+dice2+" "+dice3+" "+dice4+" "+dice5;
      }
-
 }
